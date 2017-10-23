@@ -12,6 +12,8 @@
 		3A624C6B1F9BE9460009DD4D /* RMI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A624C611F9BE9460009DD4D /* RMI.framework */; };
 		3A624C701F9BE9460009DD4D /* RMITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A624C6F1F9BE9460009DD4D /* RMITests.m */; };
 		3A624C721F9BE9460009DD4D /* RMI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A624C641F9BE9460009DD4D /* RMI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A7D30C11F9E6BE400E5D3FE /* RMIInvocationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A7D30BF1F9E6BE400E5D3FE /* RMIInvocationInfo.h */; };
+		3A7D30C21F9E6BE400E5D3FE /* RMIInvocationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D30C01F9E6BE400E5D3FE /* RMIInvocationInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,8 @@
 		3A624C6A1F9BE9460009DD4D /* RMITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A624C6F1F9BE9460009DD4D /* RMITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMITests.m; sourceTree = "<group>"; };
 		3A624C711F9BE9460009DD4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A7D30BF1F9E6BE400E5D3FE /* RMIInvocationInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIInvocationInfo.h; sourceTree = "<group>"; };
+		3A7D30C01F9E6BE400E5D3FE /* RMIInvocationInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIInvocationInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 		3A624C631F9BE9460009DD4D /* RMI */ = {
 			isa = PBXGroup;
 			children = (
+				3A7D30BD1F9E6BC200E5D3FE /* RMIInvocationInfo */,
 				3A2D9DE81F9CF444000AA28A /* RMIServer */,
 				3A624C641F9BE9460009DD4D /* RMI.h */,
 				3A624C651F9BE9460009DD4D /* Info.plist */,
@@ -100,6 +105,15 @@
 			path = RMITests;
 			sourceTree = "<group>";
 		};
+		3A7D30BD1F9E6BC200E5D3FE /* RMIInvocationInfo */ = {
+			isa = PBXGroup;
+			children = (
+				3A7D30BF1F9E6BE400E5D3FE /* RMIInvocationInfo.h */,
+				3A7D30C01F9E6BE400E5D3FE /* RMIInvocationInfo.m */,
+			);
+			path = RMIInvocationInfo;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -109,6 +123,7 @@
 			files = (
 				3A2D9DEB1F9CF45D000AA28A /* RMIServer.h in Headers */,
 				3A624C721F9BE9460009DD4D /* RMI.h in Headers */,
+				3A7D30C11F9E6BE400E5D3FE /* RMIInvocationInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A7D30C21F9E6BE400E5D3FE /* RMIInvocationInfo.m in Sources */,
 				3A2D9DEC1F9CF45D000AA28A /* RMIServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
