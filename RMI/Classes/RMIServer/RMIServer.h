@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RMIInvocationInfo.h"
+#import "NSObject+UID_Category.h"
 
 @interface RMIServer : NSObject
 
@@ -46,15 +48,17 @@
  This adds all needed info to a dictionary that mapps method calls names to the invocation information.
  * @param invocationSelector Selector for method to be visible for server.
  * @param targetObject Object that must respond to a passed selector.
+ * @param argumentsArray Array of arguments to be passed to a method
  */
-- (void)registerSelector:(SEL)invocationSelector forObject:(NSObject*)targetObject;
+- (void)registerSelector:(SEL)invocationSelector forObject:(NSObject*)targetObject withArgumentsArray:(NSArray*)argumentsArray;
 
 /*!
  * @discussion A method for registering new class and selector to server.
  This adds all needed info to a dictionary that mapps method calls names to the invocation information.
  * @param invocationSelector Selector for method to be visible for server.
  * @param targetClass Class that must respond to a passed selector.
+ * @param argumentsArray Array of arguments to be passed to a method
  */
-- (void)registerSelector:(SEL)invocationSelector forClass:(Class)targetClass;
+- (void)registerSelector:(SEL)invocationSelector forClass:(Class)targetClass withArgumentsArray:(NSArray*)argumentsArray;
 
 @end

@@ -18,6 +18,10 @@
  * @brief Dictionary that is used for mapping function calls to invocation data objects.
  */
 @property (strong, nonatomic) NSMutableDictionary* dispatchTable;
+/*!
+ * @brief A server unique identifier string.
+ */
+@property (strong, nonatomic) NSString* serverUID;
 
 @end
 
@@ -36,6 +40,7 @@
     if (self) {
         _dispatchTable = [[NSMutableDictionary alloc] init];
         _sessions = [[NSMutableArray alloc] init];
+        _serverUID = @"FIXME_REPLECE_WITH_RANDOM_STRING";
     }
     return self;
 }
@@ -88,9 +93,14 @@
  This adds all needed info to a dictionary that mapps method calls names to the invocation information.
  * @param invocationSelector Selector for method to be visible for server.
  * @param targetObject Object that must respond to a passed selector.
+ * @param argumentsArray Array of arguments to be passed to a method
  */
-- (void)registerSelector:(SEL)invocationSelector forObject:(NSObject*)targetObject {
-    // FIXME: Add implementation
+- (void)registerSelector:(SEL)invocationSelector forObject:(NSObject*)targetObject withArgumentsArray:(NSArray*)argumentsArray {
+    RMIInvocationInfo* invocationInfo = [[RMIInvocationInfo alloc] initWithMethodName:NSStringFromSelector(invocationSelector)
+                                                                            arguments:argumentsArray
+                                                                         targetObject:targetObject];
+    NSString* invocationKey = [[targetObject UID] stringValue];
+    [_dispatchTable setObject:invocationInfo forKey:invocationKey];
 }
 
 /*!
@@ -98,9 +108,15 @@
  This adds all needed info to a dictionary that mapps method calls names to the invocation information.
  * @param invocationSelector Selector for method to be visible for server.
  * @param targetClass Class that must respond to a passed selector.
+ * @param argumentsArray Array of arguments to be passed to a method
  */
-- (void)registerSelector:(SEL)invocationSelector forClass:(Class)targetClass {
-    // FIXME: Add implementation
+- (void)registerSelector:(SEL)invocationSelector forClass:(Class)targetClass withArgumentsArray:(NSArray*)argumentsArray {
+    RMIInvocationInfo* invocationInfo = [[RMIInvocationInfo alloc] initWithMethodName:NSStringFromSelector(invocationSelector)
+                                                                            arguments:argumentsArray
+                                                                          targetClass:targetClass];
+    NSString* invocationKey = [[NSStringFromClass(targetClass) stringByAppendingString:@"+"]
+                                                               stringByAppendingString:NSStringFromSelector(invocationSelector)];
+    [_dispatchTable setObject:invocationInfo forKey:invocationKey];
 }
 
 @end
