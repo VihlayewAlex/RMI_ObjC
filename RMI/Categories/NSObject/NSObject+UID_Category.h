@@ -11,6 +11,9 @@
 
 @interface NSObject (UID_Category)
 
+/*!
+ * @discussion NSObject UID getter.
+ */
 - (NSNumber*)UID;
 
 @end

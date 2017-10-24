@@ -16,4 +16,4 @@ FOUNDATION_EXPORT const unsigned char RMIVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <RMI/PublicHeader.h>
 
-#import <RMIServer.h>
+#import <RMI/RMIServer.h>

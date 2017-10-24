@@ -99,7 +99,8 @@
     RMIInvocationInfo* invocationInfo = [[RMIInvocationInfo alloc] initWithMethodName:NSStringFromSelector(invocationSelector)
                                                                             arguments:argumentsArray
                                                                          targetObject:targetObject];
-    NSString* invocationKey = [[targetObject UID] stringValue];
+    NSString* invocationKey = [[[[targetObject UID] stringValue] stringByAppendingString:@"-"]
+                                                               stringByAppendingString:NSStringFromSelector(invocationSelector)];
     [_dispatchTable setObject:invocationInfo forKey:invocationKey];
 }
 
