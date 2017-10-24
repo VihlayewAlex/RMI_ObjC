@@ -99,8 +99,7 @@
     RMIInvocationInfo* invocationInfo = [[RMIInvocationInfo alloc] initWithMethodName:NSStringFromSelector(invocationSelector)
                                                                             arguments:argumentsArray
                                                                          targetObject:targetObject];
-    NSString* invocationKey = [[[[targetObject UID] stringValue] stringByAppendingString:@"-"]
-                                                               stringByAppendingString:NSStringFromSelector(invocationSelector)];
+    NSString* invocationKey = [invocationInfo invocationKey];
     [_dispatchTable setObject:invocationInfo forKey:invocationKey];
 }
 
@@ -115,9 +114,14 @@
     RMIInvocationInfo* invocationInfo = [[RMIInvocationInfo alloc] initWithMethodName:NSStringFromSelector(invocationSelector)
                                                                             arguments:argumentsArray
                                                                           targetClass:targetClass];
-    NSString* invocationKey = [[NSStringFromClass(targetClass) stringByAppendingString:@"+"]
-                                                               stringByAppendingString:NSStringFromSelector(invocationSelector)];
+    NSString* invocationKey = [invocationInfo invocationKey];
     [_dispatchTable setObject:invocationInfo forKey:invocationKey];
+}
+
+#pragma mark Method invoking
+
+- (void)invokeMethodByInfo:(RMIInvocationInfo*)invocationInfo {
+    
 }
 
 @end

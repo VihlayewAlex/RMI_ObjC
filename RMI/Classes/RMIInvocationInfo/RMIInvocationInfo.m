@@ -10,6 +10,8 @@
 
 @implementation RMIInvocationInfo
 
+#pragma mark Initialization
+
 /*!
  * @discussion An iniitalizer for RMIInvocationInfo object.
  These objects are used to represent information about method and the receiver.
@@ -44,6 +46,23 @@
         _targetClassName = [targetClass className];
     }
     return self;
+}
+
+#pragma mark Getters
+
+- (NSString*)invocationKey {
+    switch (_targetType) {
+        case RMIInvocationTargetTypeClass:
+            return [[_targetClassName stringByAppendingString:@"+"]
+                    stringByAppendingString:_methodName];
+            break;
+        case RMIInvocationTargetTypeObject:
+            return [[[[_targetObject UID] stringValue] stringByAppendingString:@"-"]
+                    stringByAppendingString:_methodName];
+            break;
+        default:
+            break;
+    }
 }
 
 @end

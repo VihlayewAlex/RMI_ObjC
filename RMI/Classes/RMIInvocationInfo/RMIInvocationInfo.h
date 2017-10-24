@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSObject+UID_Category.h"
 
 /*!
  * @typedef RMIInvocationTargetType.
@@ -63,5 +64,7 @@ typedef enum : NSUInteger {
  * @param targetClass Message receiver class.
  */
 - (instancetype)initWithMethodName:(NSString*)methodName arguments:(NSArray*)arguments targetClass:(Class)targetClass;
+
+- (NSString*)invocationKey;
 
 @end
