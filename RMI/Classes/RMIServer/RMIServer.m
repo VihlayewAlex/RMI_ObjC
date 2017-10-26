@@ -118,10 +118,50 @@
     [_dispatchTable setObject:invocationInfo forKey:invocationKey];
 }
 
-#pragma mark Method invoking
+#pragma mark Removing methods
 
-- (void)invokeMethodByInfo:(RMIInvocationInfo*)invocationInfo {
+/*!
+ * @discussion A method for unregistering methods from RMI server.
+ * @param invocationInfo for method to be unregistered.
+ */
+- (void)unregisterMethodByInfo:(RMIInvocationInfo*)invocationInfo {
     
+}
+
+#pragma mark Method invocation
+
+/*!
+ * @discussion A method for invoking class methods that are reristered to RMI server.
+ * @param invocationInfo for method to be called.
+ */
+- (void)invokeClassMethodByInfo:(RMIInvocationInfo*)invocationInfo {
+    Class class = NSClassFromString([invocationInfo targetClassName]);
+    SEL selector = NSSelectorFromString([invocationInfo methodName]);
+    
+    NSMethodSignature* methodSignature = [NSMethodSignature methodSignatureForSelector:selector];
+    NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+    for (int i = 0; i < [[invocationInfo arguments] count]; i++) {
+        [invocation setArgument:(__bridge void * _Nonnull)([[invocationInfo arguments] objectAtIndex:i]) atIndex:i];
+    }
+    [invocation setTarget:class];
+    [invocation invoke];
+}
+
+/*!
+ * @discussion A method for invoking instance methods that are reristered to RMI server.
+ * @param invocationInfo for method to be called.
+ */
+- (void)invokeObjectMethodByInfo:(RMIInvocationInfo*)invocationInfo {
+    NSObject* object = [invocationInfo targetObject];
+    SEL selector = NSSelectorFromString([invocationInfo methodName]);
+    
+    NSMethodSignature* methodSignature = [NSMethodSignature methodSignatureForSelector:selector];
+    NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+    for (int i = 0; i < [[invocationInfo arguments] count]; i++) {
+        [invocation setArgument:(__bridge void * _Nonnull)([[invocationInfo arguments] objectAtIndex:i]) atIndex:i];
+    }
+    [invocation setTarget:object];
+    [invocation invoke];
 }
 
 @end
