@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RMIInvocationInfo.h"
 #import "NSObject+UID_Category.h"
+#import "RMISession.h"
 
 @interface RMIServer : NSObject
 

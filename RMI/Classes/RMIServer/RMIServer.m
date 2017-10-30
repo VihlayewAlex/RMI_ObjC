@@ -82,9 +82,13 @@
 
 #pragma mark Properties mutators
 
-//- (void)addSession:(RMISession*)newSession {
-//    [_sessions addObject:newSession];
-//}
+/*!
+ * @discussion A method for adding sessions to server.
+ * @param newSession A session to be added to the server.
+ */
+- (void)addSession:(RMISession*)newSession {
+    [_sessions addObject:newSession];
+}
 
 #pragma mark Registering methods
 
