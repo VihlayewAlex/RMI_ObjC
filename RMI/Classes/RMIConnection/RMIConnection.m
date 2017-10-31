@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) dispatch_queue_t socketQueue;
 @property (strong, nonatomic) GCDAsyncSocket* socket;
+@property (strong, nonatomic) NSURL* url;
 
 @end
 
@@ -27,21 +28,34 @@
     return self;
 }
 
+- (void)start
+{
+    NSError *err = nil;
+    if ([_socket connectToUrl:_url withTimeout:5 error:&err]) {
+        NSLog(@"Error connecting to url %@", [err localizedDescription]);
+    }
+}
+
+- (void)finish
+{
+    [_socket disconnect];
+}
+
 #pragma mark GCDAsyncSocketDelegate
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToUrl:(NSURL *)url
 {
-    
+    NSLog(@"Did connect to %@", [url absoluteString]);
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag
 {
-    
+    NSLog(@"Did read data %@", data);
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err
 {
-    
+    NSLog(@"Did disconnect with error %@", [err localizedDescription]);
 }
 
 @end

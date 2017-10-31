@@ -8,27 +8,41 @@
 
 #import "RMISession.h"
 
+@interface RMISession ()
+
+@property (strong, nonatomic) RMIConnection* connection;
+@property (assign, nonatomic) RMISessionState state;
+
+@end
+
 @implementation RMISession
 
 - (instancetype)initWithConfiguration:(RMISessionConfiguration*)configuration
 {
     self = [super init];
     if (self) {
+        _state = RMISessionStateNotStarted;
         _configuration = configuration;
+        _connection = [[RMIConnection alloc] initWithURL:[configuration url]];
     }
     return self;
 }
 
-- (void)resume {
-    
+- (void)resume
+{
+    [_connection start];
+    _state = RMISessionStateActive;
 }
 
-- (void)pause {
-    
+- (void)pause
+{
+    _state = RMISessionStatePaused;
 }
 
-- (void)close {
-    
+- (void)close
+{
+    [_connection finish];
+    _state = RMISessionStateFinished;
 }
 
 @end

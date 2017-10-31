@@ -11,5 +11,10 @@
 
 @interface RMIConnection : NSObject <GCDAsyncSocketDelegate>
 
+- (instancetype)initWithURL:(NSURL*)url;
+
+- (void)start;
+
+- (void)finish;
 
 @end

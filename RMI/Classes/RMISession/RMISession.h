@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "RMISessionConfiguration.h"
+#import "RMIConnection.h"
+
+typedef enum : NSUInteger {
+    RMISessionStateNotStarted,
+    RMISessionStateActive,
+    RMISessionStatePaused,
+    RMISessionStateFinished
+} RMISessionState;
 
 @interface RMISession : NSObject
 
