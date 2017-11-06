@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RMISessionConfiguration.h"
 #import "RMIConnection.h"
+#import "RMIRequestResponceMapper.h"
 
 typedef enum : NSUInteger {
     RMISessionStateNotStarted,

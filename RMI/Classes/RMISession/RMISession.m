@@ -17,6 +17,10 @@
 
 @implementation RMISession
 
+
+static RMIRequestResponceMapper* mapper;
+
+
 - (instancetype)initWithConfiguration:(RMISessionConfiguration*)configuration
 {
     self = [super init];

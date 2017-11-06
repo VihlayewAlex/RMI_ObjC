@@ -7,14 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GCDAsyncSocket.h"
 
-@interface RMIConnection : NSObject <GCDAsyncSocketDelegate>
+@interface RMIConnection : NSObject
 
+/*!
+ * @discussion A constructor for initializing RMIConnection with a given URL
+ * @param url A URL of the host to connect to.
+ */
 - (instancetype)initWithURL:(NSURL*)url;
 
+/*!
+ * @discussion Starts a connection to the host.
+ */
 - (void)start;
 
+/*!
+ * @discussion Stops active connection to the host.
+ */
 - (void)finish;
 
 @end
