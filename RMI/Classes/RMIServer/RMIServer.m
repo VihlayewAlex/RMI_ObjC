@@ -57,27 +57,55 @@
 }
 
 /*!
- * @discussion A getter for accessing active sessions managed by the server.
- * @return Array of server's active sesions.
+ * @discussion A getter for accessing not started sessions managed by the server.
+ * @return Array of server's not started sesions.
  */
-- (NSArray*)getActiveSessions {
-    return _sessions; // FIXME: filter result
+- (NSArray*)getNotStartedSessions {
+    NSPredicate* notStartedSessionsFilteringPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        RMISession* evaluatableSession = (RMISession*)evaluatedObject;
+        return ([evaluatableSession state] == RMISessionStateNotStarted);
+    }];
+    NSArray* notStartedSessions = [_sessions filteredArrayUsingPredicate:notStartedSessionsFilteringPredicate];
+    return notStartedSessions;
 }
 
 /*!
- * @discussion A getter for accessing paused sessions managed by the server.
- * @return Array of server's paused sesions.
+ * @discussion A getter for accessing connecting sessions managed by the server.
+ * @return Array of server's connecting sesions.
  */
-- (NSArray*)getPausedSessions {
-    return _sessions; // FIXME: filter result
+- (NSArray*)getConnectingSessions {
+    NSPredicate* connectingSessionsFilteringPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        RMISession* evaluatableSession = (RMISession*)evaluatedObject;
+        return ([evaluatableSession state] == RMISessionStateConnecting);
+    }];
+    NSArray* connectingSessions = [_sessions filteredArrayUsingPredicate:connectingSessionsFilteringPredicate];
+    return connectingSessions;
 }
 
 /*!
- * @discussion A getter for accessing closed sessions managed by the server.
- * @return Array of server's closed sesions.
+ * @discussion A getter for accessing running sessions managed by the server.
+ * @return Array of server's running sesions.
  */
-- (NSArray*)getClosedSessions {
-    return _sessions; // FIXME: filter result
+- (NSArray*)getRunningSessions {
+    NSPredicate* runningSessionsFilteringPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        RMISession* evaluatableSession = (RMISession*)evaluatedObject;
+        return ([evaluatableSession state] == RMISessionStateRunning);
+    }];
+    NSArray* runningSessions = [_sessions filteredArrayUsingPredicate:runningSessionsFilteringPredicate];
+    return runningSessions;
+}
+
+/*!
+ * @discussion A getter for accessing finished sessions managed by the server.
+ * @return Array of server's finished sesions.
+ */
+- (NSArray*)getFinishedSessions {
+    NSPredicate* closedSessionsFilteringPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        RMISession* evaluatableSession = (RMISession*)evaluatedObject;
+        return ([evaluatableSession state] == RMISessionStateFinished);
+    }];
+    NSArray* closedSessions = [_sessions filteredArrayUsingPredicate:closedSessionsFilteringPredicate];
+    return closedSessions;
 }
 
 #pragma mark Properties mutators
@@ -129,7 +157,7 @@
  * @param invocationInfo for method to be unregistered.
  */
 - (void)unregisterMethodByInfo:(RMIInvocationInfo*)invocationInfo {
-    
+    [_dispatchTable removeObjectForKey:[invocationInfo invocationKey]];
 }
 
 #pragma mark Method invocation

@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RMIConnectionDelegate.h"
+#import <sys/socket.h>
+#import <netinet/in.h>
 
 @interface RMIConnection : NSObject
+
+@property (weak, nonatomic) id<RMIConnectionDelegate> delegate;
 
 /*!
  * @discussion A constructor for initializing RMIConnection with a given URL

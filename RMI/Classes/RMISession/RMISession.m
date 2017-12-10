@@ -11,15 +11,10 @@
 @interface RMISession ()
 
 @property (strong, nonatomic) RMIConnection* connection;
-@property (assign, nonatomic) RMISessionState state;
 
 @end
 
 @implementation RMISession
-
-
-static RMIRequestResponceMapper* mapper;
-
 
 - (instancetype)initWithConfiguration:(RMISessionConfiguration*)configuration
 {
@@ -32,21 +27,33 @@ static RMIRequestResponceMapper* mapper;
     return self;
 }
 
-- (void)resume
+- (void)start
 {
     [_connection start];
-    _state = RMISessionStateActive;
+    _state = RMISessionStateConnecting;
 }
 
-- (void)pause
-{
-    _state = RMISessionStatePaused;
-}
-
-- (void)close
+- (void)finish
 {
     [_connection finish];
     _state = RMISessionStateFinished;
+}
+
+#pragma mark RMISessionDelegate
+
+- (void)didReceiveInvocationData:(NSData*)invocationData
+{
+    
+}
+
+- (void)didOpen
+{
+    
+}
+
+- (void)didClose
+{
+    
 }
 
 @end

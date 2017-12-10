@@ -13,4 +13,8 @@
 
 @interface RMIRequestResponceMapper : NSObject
 
++ (RMIInvocationRequest*)requestForMethodWithName:(NSString*)methodName withArguments:(NSArray*)argumentsArray receiverType:(RMIInvocationTargetType)receiverType;
+
++ (RMIInvocationResponce*)responceFromData:(NSData*)responceData;
+
 @end

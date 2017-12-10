@@ -10,25 +10,27 @@
 #import "RMISessionConfiguration.h"
 #import "RMIConnection.h"
 #import "RMIRequestResponceMapper.h"
+#import "RMIConnectionDelegate.h"
+#import "RMISessionDelegate.h"
 
 typedef enum : NSUInteger {
     RMISessionStateNotStarted,
-    RMISessionStateActive,
-    RMISessionStatePaused,
+    RMISessionStateConnecting,
+    RMISessionStateRunning,
     RMISessionStateFinished
 } RMISessionState;
 
-@interface RMISession : NSObject
+@interface RMISession : NSObject <RMIConnectionDelegate>
 
+@property (weak, nonatomic) id<RMISessionDelegate> delegate;
 @property (strong, nonatomic) RMISessionConfiguration* configuration;
-@property (assign, nonatomic) RMISessionMode* mode;
+@property (assign, nonatomic) RMISessionMode mode;
+@property (assign, nonatomic) RMISessionState state;
 
 - (instancetype)initWithConfiguration:(RMISessionConfiguration*)configuration;
 
-- (void)resume;
+- (void)start;
 
-- (void)pause;
-
-- (void)close;
+- (void)finish;
 
 @end

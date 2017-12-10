@@ -10,8 +10,9 @@
 #import "RMIInvocationInfo.h"
 #import "NSObject+UID_Category.h"
 #import "RMISession.h"
+#import "RMISessionDelegate.h"
 
-@interface RMIServer : NSObject
+@interface RMIServer : NSObject <RMISessionDelegate>
 
 /*!
  * @discussion Default RMIServer initializer.
@@ -27,22 +28,28 @@
 - (NSArray*)getSessions;
 
 /*!
- * @discussion A getter for accessing active sessions managed by the server.
- * @return Array of server's active sesions.
+ * @discussion A getter for accessing not started sessions managed by the server.
+ * @return Array of server's not started sesions.
  */
-- (NSArray*)getActiveSessions;
+- (NSArray*)getNotStartedSessions;
 
 /*!
- * @discussion A getter for accessing paused sessions managed by the server.
- * @return Array of server's paused sesions.
+ * @discussion A getter for accessing connecting sessions managed by the server.
+ * @return Array of server's connecting sesions.
  */
-- (NSArray*)getPausedSessions;
+- (NSArray*)getConnectingSessions;
 
 /*!
- * @discussion A getter for accessing closed sessions managed by the server.
- * @return Array of server's closed sesions.
+ * @discussion A getter for accessing running sessions managed by the server.
+ * @return Array of server's running sesions.
  */
-- (NSArray*)getClosedSessions;
+- (NSArray*)getRunningSessions;
+
+/*!
+ * @discussion A getter for accessing finished sessions managed by the server.
+ * @return Array of server's finished sesions.
+ */
+- (NSArray*)getFinishedSessions;
 
 /*!
  * @discussion A method for registering new object and selector to server.

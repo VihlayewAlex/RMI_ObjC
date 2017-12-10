@@ -10,8 +10,7 @@
 
 typedef enum : NSUInteger {
     RMISessionModeClient,
-    RMISessionModeServer,
-    RMISessionModeCombined
+    RMISessionModeServer
 } RMISessionMode;
 
 @interface RMISessionConfiguration : NSObject

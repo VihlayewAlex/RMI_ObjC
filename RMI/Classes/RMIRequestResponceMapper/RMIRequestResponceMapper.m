@@ -15,9 +15,20 @@
     return [[RMIInvocationRequest alloc] init];
 }
 
++ (RMIInvocationRequest*)requestFromData:(NSData*)requestData
+{
+    return [[RMIInvocationRequest alloc] init];
+}
+
+
 + (RMIInvocationResponce*)responceFromData:(NSData*)responceData
 {
     return [[RMIInvocationResponce alloc] init];
+}
+
++ (NSData*)dataFromInvocationRequest:(RMIInvocationRequest*)invocationRequest
+{
+    return [[NSData alloc] init];
 }
 
 @end

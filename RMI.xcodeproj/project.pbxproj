@@ -14,6 +14,8 @@
 		3A624C6B1F9BE9460009DD4D /* RMI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A624C611F9BE9460009DD4D /* RMI.framework */; };
 		3A624C701F9BE9460009DD4D /* RMITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A624C6F1F9BE9460009DD4D /* RMITests.m */; };
 		3A624C721F9BE9460009DD4D /* RMI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A624C641F9BE9460009DD4D /* RMI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A78BD371FB106E3001A4FD7 /* RMIConnectionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A78BD361FB106E3001A4FD7 /* RMIConnectionDelegate.h */; };
+		3A78BD391FB1143B001A4FD7 /* RMISessionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A78BD381FB1143B001A4FD7 /* RMISessionDelegate.h */; };
 		3A7D30C11F9E6BE400E5D3FE /* RMIInvocationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A7D30BF1F9E6BE400E5D3FE /* RMIInvocationInfo.h */; };
 		3A7D30C21F9E6BE400E5D3FE /* RMIInvocationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D30C01F9E6BE400E5D3FE /* RMIInvocationInfo.m */; };
 		3A7D30CA1F9E8A9600E5D3FE /* NSObject+UID_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D30C81F9E8A9600E5D3FE /* NSObject+UID_Category.m */; };
@@ -50,6 +52,8 @@
 		3A624C6A1F9BE9460009DD4D /* RMITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A624C6F1F9BE9460009DD4D /* RMITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMITests.m; sourceTree = "<group>"; };
 		3A624C711F9BE9460009DD4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A78BD361FB106E3001A4FD7 /* RMIConnectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIConnectionDelegate.h; sourceTree = "<group>"; };
+		3A78BD381FB1143B001A4FD7 /* RMISessionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMISessionDelegate.h; sourceTree = "<group>"; };
 		3A7D30BF1F9E6BE400E5D3FE /* RMIInvocationInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIInvocationInfo.h; sourceTree = "<group>"; };
 		3A7D30C01F9E6BE400E5D3FE /* RMIInvocationInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIInvocationInfo.m; sourceTree = "<group>"; };
 		3A7D30C61F9E7F9B00E5D3FE /* NSObject+UID_Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+UID_Category.h"; sourceTree = "<group>"; };
@@ -90,6 +94,7 @@
 			children = (
 				3A2C1D9A1FA70F1900706842 /* RMIConnection.h */,
 				3A2C1D9B1FA70F1900706842 /* RMIConnection.m */,
+				3A78BD361FB106E3001A4FD7 /* RMIConnectionDelegate.h */,
 			);
 			path = RMIConnection;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 			children = (
 				3AF9F12C1FA1634B00D8472F /* RMISession.h */,
 				3AF9F12D1FA1634B00D8472F /* RMISession.m */,
+				3A78BD381FB1143B001A4FD7 /* RMISessionDelegate.h */,
 			);
 			path = RMISession;
 			sourceTree = "<group>";
@@ -242,11 +248,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A78BD371FB106E3001A4FD7 /* RMIConnectionDelegate.h in Headers */,
 				3A2C1D9C1FA70F1900706842 /* RMIConnection.h in Headers */,
 				3A2D9DEB1F9CF45D000AA28A /* RMIServer.h in Headers */,
 				3AEF30BD1FA2366D00482AA8 /* RMISessionConfiguration.h in Headers */,
 				3A624C721F9BE9460009DD4D /* RMI.h in Headers */,
 				3AA401801FAB54C80018C016 /* RMIInvocationResponce.h in Headers */,
+				3A78BD391FB1143B001A4FD7 /* RMISessionDelegate.h in Headers */,
 				3AA401611FAB4AD20018C016 /* RMIRequestResponceMapper.h in Headers */,
 				3AA4017B1FAB54830018C016 /* RMIInvocationRequest.h in Headers */,
 				3AF9F12E1FA1634B00D8472F /* RMISession.h in Headers */,
