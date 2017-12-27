@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A2C1D9C1FA70F1900706842 /* RMIConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2C1D9A1FA70F1900706842 /* RMIConnection.h */; };
-		3A2C1D9D1FA70F1900706842 /* RMIConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2C1D9B1FA70F1900706842 /* RMIConnection.m */; };
+		3A2C1D9C1FA70F1900706842 /* RMIServerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2C1D9A1FA70F1900706842 /* RMIServerConnection.h */; };
+		3A2C1D9D1FA70F1900706842 /* RMIServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2C1D9B1FA70F1900706842 /* RMIServerConnection.m */; };
 		3A2D9DEB1F9CF45D000AA28A /* RMIServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2D9DE91F9CF45D000AA28A /* RMIServer.h */; };
 		3A2D9DEC1F9CF45D000AA28A /* RMIServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D9DEA1F9CF45D000AA28A /* RMIServer.m */; };
+		3A53112A1FF3C37A0064B078 /* RMIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A5311281FF3C37A0064B078 /* RMIClient.h */; };
+		3A53112B1FF3C37A0064B078 /* RMIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5311291FF3C37A0064B078 /* RMIClient.m */; };
+		3A5311341FF3C7980064B078 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5311331FF3C7980064B078 /* AppDelegate.m */; };
+		3A5311361FF3C7980064B078 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5311351FF3C7980064B078 /* Assets.xcassets */; };
+		3A5311391FF3C7980064B078 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5311371FF3C7980064B078 /* MainMenu.xib */; };
+		3A53113C1FF3C7980064B078 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A53113B1FF3C7980064B078 /* main.m */; };
+		3A5311501FF3D57E0064B078 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A53114E1FF3D57E0064B078 /* MainWindowController.m */; };
+		3A5311511FF3D57E0064B078 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A53114F1FF3D57E0064B078 /* MainWindowController.xib */; };
+		3A5311561FF3D9DA0064B078 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5311541FF3D9DA0064B078 /* MainViewController.m */; };
+		3A5311571FF3D9DA0064B078 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5311551FF3D9DA0064B078 /* MainViewController.xib */; };
+		3A5311591FF3DFDB0064B078 /* RMI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A624C611F9BE9460009DD4D /* RMI.framework */; };
+		3A53115A1FF3DFDB0064B078 /* RMI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A624C611F9BE9460009DD4D /* RMI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A624C6B1F9BE9460009DD4D /* RMI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A624C611F9BE9460009DD4D /* RMI.framework */; };
 		3A624C701F9BE9460009DD4D /* RMITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A624C6F1F9BE9460009DD4D /* RMITests.m */; };
 		3A624C721F9BE9460009DD4D /* RMI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A624C641F9BE9460009DD4D /* RMI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A78BD371FB106E3001A4FD7 /* RMIConnectionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A78BD361FB106E3001A4FD7 /* RMIConnectionDelegate.h */; };
-		3A78BD391FB1143B001A4FD7 /* RMISessionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A78BD381FB1143B001A4FD7 /* RMISessionDelegate.h */; };
 		3A7D30C11F9E6BE400E5D3FE /* RMIInvocationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A7D30BF1F9E6BE400E5D3FE /* RMIInvocationInfo.h */; };
 		3A7D30C21F9E6BE400E5D3FE /* RMIInvocationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D30C01F9E6BE400E5D3FE /* RMIInvocationInfo.m */; };
 		3A7D30CA1F9E8A9600E5D3FE /* NSObject+UID_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7D30C81F9E8A9600E5D3FE /* NSObject+UID_Category.m */; };
@@ -25,13 +36,18 @@
 		3AA4017C1FAB54830018C016 /* RMIInvocationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4017A1FAB54830018C016 /* RMIInvocationRequest.m */; };
 		3AA401801FAB54C80018C016 /* RMIInvocationResponce.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA4017E1FAB54C80018C016 /* RMIInvocationResponce.h */; };
 		3AA401811FAB54C80018C016 /* RMIInvocationResponce.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4017F1FAB54C80018C016 /* RMIInvocationResponce.m */; };
-		3AEF30BD1FA2366D00482AA8 /* RMISessionConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AEF30BB1FA2366D00482AA8 /* RMISessionConfiguration.h */; };
-		3AEF30BE1FA2366D00482AA8 /* RMISessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF30BC1FA2366D00482AA8 /* RMISessionConfiguration.m */; };
-		3AF9F12E1FA1634B00D8472F /* RMISession.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AF9F12C1FA1634B00D8472F /* RMISession.h */; };
-		3AF9F12F1FA1634B00D8472F /* RMISession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9F12D1FA1634B00D8472F /* RMISession.m */; };
+		3AE077391FDD6CBE00749360 /* RMIClientConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AE077371FDD6CBE00749360 /* RMIClientConnection.h */; };
+		3AE0773A1FDD6CBE00749360 /* RMIClientConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE077381FDD6CBE00749360 /* RMIClientConnection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3A53115B1FF3DFDB0064B078 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A624C581F9BE9460009DD4D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A624C601F9BE9460009DD4D;
+			remoteInfo = RMI;
+		};
 		3A624C6C1F9BE9460009DD4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3A624C581F9BE9460009DD4D /* Project object */;
@@ -41,19 +57,48 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3A53115D1FF3DFDC0064B078 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3A53115A1FF3DFDB0064B078 /* RMI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		3A2C1D9A1FA70F1900706842 /* RMIConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIConnection.h; sourceTree = "<group>"; };
-		3A2C1D9B1FA70F1900706842 /* RMIConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIConnection.m; sourceTree = "<group>"; };
+		3A2C1D9A1FA70F1900706842 /* RMIServerConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIServerConnection.h; sourceTree = "<group>"; };
+		3A2C1D9B1FA70F1900706842 /* RMIServerConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIServerConnection.m; sourceTree = "<group>"; };
 		3A2D9DE91F9CF45D000AA28A /* RMIServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIServer.h; sourceTree = "<group>"; };
 		3A2D9DEA1F9CF45D000AA28A /* RMIServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIServer.m; sourceTree = "<group>"; };
+		3A5311281FF3C37A0064B078 /* RMIClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIClient.h; sourceTree = "<group>"; };
+		3A5311291FF3C37A0064B078 /* RMIClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIClient.m; sourceTree = "<group>"; };
+		3A5311301FF3C7980064B078 /* testServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A5311321FF3C7980064B078 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3A5311331FF3C7980064B078 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3A5311351FF3C7980064B078 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A5311381FF3C7980064B078 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		3A53113A1FF3C7980064B078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A53113B1FF3C7980064B078 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A53113D1FF3C7980064B078 /* testServer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = testServer.entitlements; sourceTree = "<group>"; };
+		3A53114D1FF3D57E0064B078 /* MainWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
+		3A53114E1FF3D57E0064B078 /* MainWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
+		3A53114F1FF3D57E0064B078 /* MainWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
+		3A5311531FF3D9DA0064B078 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		3A5311541FF3D9DA0064B078 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		3A5311551FF3D9DA0064B078 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		3A624C611F9BE9460009DD4D /* RMI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RMI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A624C641F9BE9460009DD4D /* RMI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMI.h; sourceTree = "<group>"; };
 		3A624C651F9BE9460009DD4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A624C6A1F9BE9460009DD4D /* RMITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A624C6F1F9BE9460009DD4D /* RMITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMITests.m; sourceTree = "<group>"; };
 		3A624C711F9BE9460009DD4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A78BD361FB106E3001A4FD7 /* RMIConnectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIConnectionDelegate.h; sourceTree = "<group>"; };
-		3A78BD381FB1143B001A4FD7 /* RMISessionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMISessionDelegate.h; sourceTree = "<group>"; };
+		3A78BD361FB106E3001A4FD7 /* RMIConnectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RMIConnectionDelegate.h; path = ../Connections/RMIConnectionDelegate.h; sourceTree = "<group>"; };
 		3A7D30BF1F9E6BE400E5D3FE /* RMIInvocationInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIInvocationInfo.h; sourceTree = "<group>"; };
 		3A7D30C01F9E6BE400E5D3FE /* RMIInvocationInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIInvocationInfo.m; sourceTree = "<group>"; };
 		3A7D30C61F9E7F9B00E5D3FE /* NSObject+UID_Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+UID_Category.h"; sourceTree = "<group>"; };
@@ -64,13 +109,20 @@
 		3AA4017A1FAB54830018C016 /* RMIInvocationRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIInvocationRequest.m; sourceTree = "<group>"; };
 		3AA4017E1FAB54C80018C016 /* RMIInvocationResponce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIInvocationResponce.h; sourceTree = "<group>"; };
 		3AA4017F1FAB54C80018C016 /* RMIInvocationResponce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIInvocationResponce.m; sourceTree = "<group>"; };
-		3AEF30BB1FA2366D00482AA8 /* RMISessionConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMISessionConfiguration.h; sourceTree = "<group>"; };
-		3AEF30BC1FA2366D00482AA8 /* RMISessionConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMISessionConfiguration.m; sourceTree = "<group>"; };
-		3AF9F12C1FA1634B00D8472F /* RMISession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMISession.h; sourceTree = "<group>"; };
-		3AF9F12D1FA1634B00D8472F /* RMISession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMISession.m; sourceTree = "<group>"; };
+		3AE077371FDD6CBE00749360 /* RMIClientConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIClientConnection.h; sourceTree = "<group>"; };
+		3AE077381FDD6CBE00749360 /* RMIClientConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIClientConnection.m; sourceTree = "<group>"; };
+		3AE0773B1FDD6D2E00749360 /* RMIConnectionState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIConnectionState.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3A53112D1FF3C7980064B078 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A5311591FF3DFDB0064B078 /* RMI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A624C5D1F9BE9460009DD4D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -89,14 +141,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3A2C1D991FA70EF100706842 /* RMIConnection */ = {
+		3A2C1D991FA70EF100706842 /* RMIServerConnection */ = {
 			isa = PBXGroup;
 			children = (
-				3A2C1D9A1FA70F1900706842 /* RMIConnection.h */,
-				3A2C1D9B1FA70F1900706842 /* RMIConnection.m */,
-				3A78BD361FB106E3001A4FD7 /* RMIConnectionDelegate.h */,
+				3A2C1D9A1FA70F1900706842 /* RMIServerConnection.h */,
+				3A2C1D9B1FA70F1900706842 /* RMIServerConnection.m */,
 			);
-			path = RMIConnection;
+			path = RMIServerConnection;
 			sourceTree = "<group>";
 		};
 		3A2D9DE81F9CF444000AA28A /* RMIServer */ = {
@@ -104,8 +155,69 @@
 			children = (
 				3A2D9DE91F9CF45D000AA28A /* RMIServer.h */,
 				3A2D9DEA1F9CF45D000AA28A /* RMIServer.m */,
+				3A2C1D991FA70EF100706842 /* RMIServerConnection */,
 			);
 			path = RMIServer;
+			sourceTree = "<group>";
+		};
+		3A5311311FF3C7980064B078 /* testServer */ = {
+			isa = PBXGroup;
+			children = (
+				3A5311581FF3DAEF0064B078 /* AppDelegate */,
+				3A53114C1FF3D5630064B078 /* MainWindowController */,
+				3A5311521FF3D9AD0064B078 /* MainViewController */,
+				3A5311351FF3C7980064B078 /* Assets.xcassets */,
+				3A5311371FF3C7980064B078 /* MainMenu.xib */,
+				3A53113A1FF3C7980064B078 /* Info.plist */,
+				3A53113B1FF3C7980064B078 /* main.m */,
+				3A53113D1FF3C7980064B078 /* testServer.entitlements */,
+			);
+			path = testServer;
+			sourceTree = "<group>";
+		};
+		3A5311411FF3C8A30064B078 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A5311431FF3CE500064B078 /* Connections */ = {
+			isa = PBXGroup;
+			children = (
+				3AE0773B1FDD6D2E00749360 /* RMIConnectionState.h */,
+				3A78BD361FB106E3001A4FD7 /* RMIConnectionDelegate.h */,
+			);
+			path = Connections;
+			sourceTree = "<group>";
+		};
+		3A53114C1FF3D5630064B078 /* MainWindowController */ = {
+			isa = PBXGroup;
+			children = (
+				3A53114D1FF3D57E0064B078 /* MainWindowController.h */,
+				3A53114E1FF3D57E0064B078 /* MainWindowController.m */,
+				3A53114F1FF3D57E0064B078 /* MainWindowController.xib */,
+			);
+			path = MainWindowController;
+			sourceTree = "<group>";
+		};
+		3A5311521FF3D9AD0064B078 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3A5311531FF3D9DA0064B078 /* MainViewController.h */,
+				3A5311541FF3D9DA0064B078 /* MainViewController.m */,
+				3A5311551FF3D9DA0064B078 /* MainViewController.xib */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		3A5311581FF3DAEF0064B078 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				3A5311321FF3C7980064B078 /* AppDelegate.h */,
+				3A5311331FF3C7980064B078 /* AppDelegate.m */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		3A624C571F9BE9460009DD4D = {
@@ -113,7 +225,9 @@
 			children = (
 				3A624C631F9BE9460009DD4D /* RMI */,
 				3A624C6E1F9BE9460009DD4D /* RMITests */,
+				3A5311311FF3C7980064B078 /* testServer */,
 				3A624C621F9BE9460009DD4D /* Products */,
+				3A5311411FF3C8A30064B078 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +236,7 @@
 			children = (
 				3A624C611F9BE9460009DD4D /* RMI.framework */,
 				3A624C6A1F9BE9460009DD4D /* RMITests.xctest */,
+				3A5311301FF3C7980064B078 /* testServer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,14 +281,9 @@
 		3A7D30C31F9E7F3F00E5D3FE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3AA4017D1FAB54BF0018C016 /* RMIInvocationResponce */,
-				3AA401761FAB54600018C016 /* RMIInvocationRequest */,
-				3AEF30BA1FA2365F00482AA8 /* RMISessionConfiguration */,
-				3AF9F12B1FA1633500D8472F /* RMISession */,
-				3AA4015E1FAB4ABC0018C016 /* RMIRequestResponceMapper */,
-				3A7D30BD1F9E6BC200E5D3FE /* RMIInvocationInfo */,
-				3A2D9DE81F9CF444000AA28A /* RMIServer */,
-				3A2C1D991FA70EF100706842 /* RMIConnection */,
+				3AE0773C1FDD6F8300749360 /* Server */,
+				3AE0773D1FDD6F9100749360 /* Client */,
+				3AE077431FDD704100749360 /* Shared */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -222,23 +332,67 @@
 			path = RMIInvocationResponce;
 			sourceTree = "<group>";
 		};
-		3AEF30BA1FA2365F00482AA8 /* RMISessionConfiguration */ = {
+		3AE0772C1FDD52A900749360 /* Invocation */ = {
 			isa = PBXGroup;
 			children = (
-				3AEF30BB1FA2366D00482AA8 /* RMISessionConfiguration.h */,
-				3AEF30BC1FA2366D00482AA8 /* RMISessionConfiguration.m */,
+				3A7D30BD1F9E6BC200E5D3FE /* RMIInvocationInfo */,
+				3AE0772D1FDD52BF00749360 /* Request-Responce objects */,
 			);
-			path = RMISessionConfiguration;
+			path = Invocation;
 			sourceTree = "<group>";
 		};
-		3AF9F12B1FA1633500D8472F /* RMISession */ = {
+		3AE0772D1FDD52BF00749360 /* Request-Responce objects */ = {
 			isa = PBXGroup;
 			children = (
-				3AF9F12C1FA1634B00D8472F /* RMISession.h */,
-				3AF9F12D1FA1634B00D8472F /* RMISession.m */,
-				3A78BD381FB1143B001A4FD7 /* RMISessionDelegate.h */,
+				3AA401761FAB54600018C016 /* RMIInvocationRequest */,
+				3AA4017D1FAB54BF0018C016 /* RMIInvocationResponce */,
 			);
-			path = RMISession;
+			path = "Request-Responce objects";
+			sourceTree = "<group>";
+		};
+		3AE077361FDD6CA100749360 /* RMIClientConnection */ = {
+			isa = PBXGroup;
+			children = (
+				3AE077371FDD6CBE00749360 /* RMIClientConnection.h */,
+				3AE077381FDD6CBE00749360 /* RMIClientConnection.m */,
+			);
+			path = RMIClientConnection;
+			sourceTree = "<group>";
+		};
+		3AE0773C1FDD6F8300749360 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				3A2D9DE81F9CF444000AA28A /* RMIServer */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		3AE0773D1FDD6F9100749360 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				3AE0773E1FDD6F9D00749360 /* RMIClient */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		3AE0773E1FDD6F9D00749360 /* RMIClient */ = {
+			isa = PBXGroup;
+			children = (
+				3A5311281FF3C37A0064B078 /* RMIClient.h */,
+				3A5311291FF3C37A0064B078 /* RMIClient.m */,
+				3AE077361FDD6CA100749360 /* RMIClientConnection */,
+			);
+			path = RMIClient;
+			sourceTree = "<group>";
+		};
+		3AE077431FDD704100749360 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				3A5311431FF3CE500064B078 /* Connections */,
+				3AE0772C1FDD52A900749360 /* Invocation */,
+				3AA4015E1FAB4ABC0018C016 /* RMIRequestResponceMapper */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,15 +403,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A78BD371FB106E3001A4FD7 /* RMIConnectionDelegate.h in Headers */,
-				3A2C1D9C1FA70F1900706842 /* RMIConnection.h in Headers */,
+				3A53112A1FF3C37A0064B078 /* RMIClient.h in Headers */,
+				3A2C1D9C1FA70F1900706842 /* RMIServerConnection.h in Headers */,
 				3A2D9DEB1F9CF45D000AA28A /* RMIServer.h in Headers */,
-				3AEF30BD1FA2366D00482AA8 /* RMISessionConfiguration.h in Headers */,
 				3A624C721F9BE9460009DD4D /* RMI.h in Headers */,
 				3AA401801FAB54C80018C016 /* RMIInvocationResponce.h in Headers */,
-				3A78BD391FB1143B001A4FD7 /* RMISessionDelegate.h in Headers */,
+				3AE077391FDD6CBE00749360 /* RMIClientConnection.h in Headers */,
 				3AA401611FAB4AD20018C016 /* RMIRequestResponceMapper.h in Headers */,
 				3AA4017B1FAB54830018C016 /* RMIInvocationRequest.h in Headers */,
-				3AF9F12E1FA1634B00D8472F /* RMISession.h in Headers */,
 				3A7D30C11F9E6BE400E5D3FE /* RMIInvocationInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +418,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3A53112F1FF3C7980064B078 /* testServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A53113E1FF3C7980064B078 /* Build configuration list for PBXNativeTarget "testServer" */;
+			buildPhases = (
+				3A53112C1FF3C7980064B078 /* Sources */,
+				3A53112D1FF3C7980064B078 /* Frameworks */,
+				3A53112E1FF3C7980064B078 /* Resources */,
+				3A53115D1FF3DFDC0064B078 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3A53115C1FF3DFDB0064B078 /* PBXTargetDependency */,
+			);
+			name = testServer;
+			productName = testServer;
+			productReference = 3A5311301FF3C7980064B078 /* testServer.app */;
+			productType = "com.apple.product-type.application";
+		};
 		3A624C601F9BE9460009DD4D /* RMI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A624C751F9BE9460009DD4D /* Build configuration list for PBXNativeTarget "RMI" */;
@@ -310,6 +482,10 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Alex Vihlayew";
 				TargetAttributes = {
+					3A53112F1FF3C7980064B078 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					3A624C601F9BE9460009DD4D = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 0910;
@@ -327,6 +503,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 3A624C571F9BE9460009DD4D;
 			productRefGroup = 3A624C621F9BE9460009DD4D /* Products */;
@@ -335,11 +512,23 @@
 			targets = (
 				3A624C601F9BE9460009DD4D /* RMI */,
 				3A624C691F9BE9460009DD4D /* RMITests */,
+				3A53112F1FF3C7980064B078 /* testServer */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3A53112E1FF3C7980064B078 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A5311361FF3C7980064B078 /* Assets.xcassets in Resources */,
+				3A5311511FF3D57E0064B078 /* MainWindowController.xib in Resources */,
+				3A5311391FF3C7980064B078 /* MainMenu.xib in Resources */,
+				3A5311571FF3D9DA0064B078 /* MainViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A624C5F1F9BE9460009DD4D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -357,17 +546,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3A53112C1FF3C7980064B078 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A5311501FF3D57E0064B078 /* MainWindowController.m in Sources */,
+				3A53113C1FF3C7980064B078 /* main.m in Sources */,
+				3A5311341FF3C7980064B078 /* AppDelegate.m in Sources */,
+				3A5311561FF3D9DA0064B078 /* MainViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A624C5C1F9BE9460009DD4D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3A7D30C21F9E6BE400E5D3FE /* RMIInvocationInfo.m in Sources */,
-				3A2C1D9D1FA70F1900706842 /* RMIConnection.m in Sources */,
-				3AEF30BE1FA2366D00482AA8 /* RMISessionConfiguration.m in Sources */,
+				3AE0773A1FDD6CBE00749360 /* RMIClientConnection.m in Sources */,
+				3A2C1D9D1FA70F1900706842 /* RMIServerConnection.m in Sources */,
 				3A2D9DEC1F9CF45D000AA28A /* RMIServer.m in Sources */,
 				3A7D30CA1F9E8A9600E5D3FE /* NSObject+UID_Category.m in Sources */,
+				3A53112B1FF3C37A0064B078 /* RMIClient.m in Sources */,
 				3AA401811FAB54C80018C016 /* RMIInvocationResponce.m in Sources */,
-				3AF9F12F1FA1634B00D8472F /* RMISession.m in Sources */,
 				3AA4017C1FAB54830018C016 /* RMIInvocationRequest.m in Sources */,
 				3AA401621FAB4AD20018C016 /* RMIRequestResponceMapper.m in Sources */,
 			);
@@ -384,6 +584,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3A53115C1FF3DFDB0064B078 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A624C601F9BE9460009DD4D /* RMI */;
+			targetProxy = 3A53115B1FF3DFDB0064B078 /* PBXContainerItemProxy */;
+		};
 		3A624C6D1F9BE9460009DD4D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3A624C601F9BE9460009DD4D /* RMI */;
@@ -391,11 +596,53 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		3A5311371FF3C7980064B078 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A5311381FF3C7980064B078 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		3A53113F1FF3C7980064B078 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = testServer/testServer.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22U234HGU8;
+				INFOPLIST_FILE = testServer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vihlayew.testServer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3A5311401FF3C7980064B078 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = testServer/testServer.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22U234HGU8;
+				INFOPLIST_FILE = testServer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vihlayew.testServer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		3A624C731F9BE9460009DD4D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -454,6 +701,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -504,6 +752,7 @@
 		3A624C761F9BE9460009DD4D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -529,6 +778,7 @@
 		3A624C771F9BE9460009DD4D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -579,6 +829,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3A53113E1FF3C7980064B078 /* Build configuration list for PBXNativeTarget "testServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A53113F1FF3C7980064B078 /* Debug */,
+				3A5311401FF3C7980064B078 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3A624C5B1F9BE9460009DD4D /* Build configuration list for PBXProject "RMI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
