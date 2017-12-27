@@ -19,20 +19,19 @@
 @property (assign, nonatomic) RMIConnectionState state;
 
 /*!
- * @discussion A constructor for initializing RMIConnection with a given URL
- * @param address An address of the host to connect to.
- * @param port A target port of the host.
+ * @discussion A constructor for initializing RMIConnection with a given port
+ * @param port A target port to start on.
  */
-- (instancetype)initWithAddress:(NSString*)address port:(NSInteger)port;
+- (instancetype)initWithPort:(NSInteger)port;
 
 /*!
- * @discussion Starts a connection to the host.
+ * @discussion Opens a connection.
  */
-- (void)start;
+- (void)open;
 
 /*!
- * @discussion Stops active connection to the host.
+ * @discussion Closes a connection.
  */
-- (void)finish;
+- (void)close;
 
 @end

@@ -1,8 +1,8 @@
 //
 //  AppDelegate.m
-//  testServer
+//  testClient
 //
-//  Created by Alex Vihlayew on 12/27/17.
+//  Created by Alex Vihlayew on 12/28/17.
 //  Copyright © 2017 Alex Vihlayew. All rights reserved.
 //
 
@@ -17,7 +17,7 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{    
+{
     [self setupWindows];
 }
 

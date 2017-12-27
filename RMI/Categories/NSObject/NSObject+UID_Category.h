@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <objc/runtime.h>
+#import <CommonCrypto/CommonDigest.h>
 
 @interface NSObject (UID_Category)
 
 /*!
  * @discussion NSObject UID getter.
  */
-- (NSNumber*)UID;
+- (NSString*)UID;
 
 @end
 

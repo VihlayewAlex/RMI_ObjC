@@ -22,6 +22,7 @@
 {
     self = [super init];
     if (self) {
+        _targetType = RMIInvocationTargetTypeObject;
         _methodName = methodName;
         _targetObject = targetObject;
     }
@@ -38,6 +39,7 @@
 {
     self = [super init];
     if (self) {
+        _targetType = RMIInvocationTargetTypeClass;
         _methodName = methodName;
         _targetClassName = [targetClass className];
     }
@@ -47,13 +49,16 @@
 #pragma mark Getters
 
 - (NSString*)invocationKey {
+    NSLog(@"- (NSString*)invocationKey");
     switch (_targetType) {
         case RMIInvocationTargetTypeClass:
+            NSLog(@"RMIInvocationTargetTypeClass");
             return [[_targetClassName stringByAppendingString:@"+"]
                     stringByAppendingString:_methodName];
             break;
         case RMIInvocationTargetTypeObject:
-            return [[[[_targetObject UID] stringValue] stringByAppendingString:@"-"]
+            NSLog(@"RMIInvocationTargetTypeObject %@", [_targetObject UID]);
+            return [[[_targetObject UID] stringByAppendingString:@"-"]
                     stringByAppendingString:_methodName];
             break;
         default:

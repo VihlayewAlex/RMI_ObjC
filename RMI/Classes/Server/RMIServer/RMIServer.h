@@ -15,6 +15,13 @@
 
 @interface RMIServer : NSObject <RMIConnectionDelegate>
 
+#pragma mark Properties
+
+/*!
+ * @brief Array of sessions that are managed by this server.
+ */
+@property (strong, nonatomic) RMIServerConnection* _Nonnull connection;
+
 #pragma mark Initialization
 
 /*!
@@ -23,46 +30,17 @@
  */
 - (instancetype _Nullable )init;
 
-#pragma mark Properties accessors
+#pragma mark State control
 
 /*!
- * @discussion A getter for accessing connections managed by the server.
- Also look at convenient methods for getting only sections of some type.
- * @return Array of all server's sesions.
+ * @discussion Opens default server connection.
  */
-- (NSArray* _Nonnull)getConnections;
+- (void)start;
 
 /*!
- * @discussion A getter for accessing not started connections managed by the server.
- * @return Array of server's not started sesions.
+ * @discussion Closes default server connection.
  */
-- (NSArray* _Nonnull)getNotStartedConnections;
-
-/*!
- * @discussion A getter for accessing connecting connections managed by the server.
- * @return Array of server's connecting sesions.
- */
-- (NSArray* _Nonnull)getConnectingConnections;
-
-/*!
- * @discussion A getter for accessing running connections managed by the server.
- * @return Array of server's running sesions.
- */
-- (NSArray* _Nonnull)getOpenConnections;
-
-/*!
- * @discussion A getter for accessing finished connections managed by the server.
- * @return Array of server's finished sesions.
- */
-- (NSArray* _Nonnull)getClosedConnections;
-
-#pragma mark Properties mutators
-
-/*!
- * @discussion A method for adding sessions to server.
- * @param newConnection A connection to be added to the server.
- */
-- (void)addConnection:(RMIServerConnection* _Nonnull)newConnection;
+- (void)stop;
 
 #pragma mark Registering methods
 
@@ -72,7 +50,7 @@
  * @param invocationSelector Selector for method to be visible for server.
  * @param targetObject Object that must respond to a passed selector.
  */
-- (void)registerSelector:(SEL _Nonnull )invocationSelector forObject:(NSObject* _Nonnull)targetObject;
+- (void)registerSelector:(SEL _Nonnull)invocationSelector forObject:(NSObject* _Nonnull)targetObject;
 
 /*!
  * @discussion A method for registering new class and selector to server.
@@ -80,6 +58,6 @@
  * @param invocationSelector Selector for method to be visible for server.
  * @param targetClass Class that must respond to a passed selector.
  */
-- (void)registerSelector:(SEL _Nonnull )invocationSelector forClass:(Class _Nonnull)targetClass;
+- (void)registerSelector:(SEL _Nonnull)invocationSelector forClass:(Class _Nonnull)targetClass;
 
 @end

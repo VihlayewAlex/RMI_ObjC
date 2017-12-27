@@ -11,17 +11,9 @@
 @interface RMIServer ()
 
 /*!
- * @brief Array of sessions that are managed by this server.
- */
-@property (strong, nonatomic) NSMutableArray* connections;
-/*!
  * @brief Dictionary that is used for mapping function calls to invocation data objects.
  */
 @property (strong, nonatomic) NSMutableDictionary* dispatchTable;
-/*!
- * @brief A server unique identifier string.
- */
-@property (strong, nonatomic) NSString* serverUID;
 
 @end
 
@@ -36,76 +28,26 @@
  */
 - (instancetype)init
 {
+    NSLog(@"- (instancetype)init");
     self = [super init];
     if (self) {
         _dispatchTable = [[NSMutableDictionary alloc] init];
-        _connections = [[NSMutableArray alloc] init];
-        _serverUID = @"FIXME_REPLECE_WITH_RANDOM_STRING";
+        _connection = [[RMIServerConnection alloc] initWithPort:12345];
+        [_connection setDelegate:self];
     }
     return self;
 }
 
-#pragma mark Properties accessors
+#pragma mark Connection
 
-/*!
- * @discussion A getter for accessing connections managed by the server.
- Also look at convenient methods for getting only connections of some type.
- * @return Array of all server's connections.
- */
-- (NSArray*)getConnections {
-    return _connections;
+- (void)start
+{
+    [_connection open];
 }
 
-/*!
- * @discussion A getter for accessing not started connections managed by the server.
- * @return Array of server's not started connections.
- */
-- (NSArray*)getNotStartedConnections {
-    NSPredicate* notStartedConnectionsFilteringPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        RMIServerConnection* evaluatableConnection = (RMIServerConnection*)evaluatedObject;
-        return ([evaluatableConnection state] == RMIConnectionStateNotStarted);
-    }];
-    NSArray* notStartedConnections = [_connections filteredArrayUsingPredicate:notStartedConnectionsFilteringPredicate];
-    return notStartedConnections;
-}
-
-/*!
- * @discussion A getter for accessing connecting connections managed by the server.
- * @return Array of server's connecting connections.
- */
-- (NSArray*)getConnectingConnections {
-    NSPredicate* connectingConnectionsFilteringPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        RMIServerConnection* evaluatableConnection = (RMIServerConnection*)evaluatedObject;
-        return ([evaluatableConnection state] == RMIConnectionStateConnecting);
-    }];
-    NSArray* connectingConnections = [_connections filteredArrayUsingPredicate:connectingConnectionsFilteringPredicate];
-    return connectingConnections;
-}
-
-/*!
- * @discussion A getter for accessing running connections managed by the server.
- * @return Array of server's running connections.
- */
-- (NSArray*)getOpenConnections {
-    NSPredicate* runningConnectionsFilteringPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        RMIServerConnection* evaluatableConnection = (RMIServerConnection*)evaluatedObject;
-        return ([evaluatableConnection state] == RMIConnectionStateRunning);
-    }];
-    NSArray* runningConnections = [_connections filteredArrayUsingPredicate:runningConnectionsFilteringPredicate];
-    return runningConnections;
-}
-
-/*!
- * @discussion A getter for accessing finished connections managed by the server.
- * @return Array of server's finished connections.
- */
-- (NSArray*)getClosedConnections {
-    NSPredicate* closedConnectionsFilteringPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-        RMIServerConnection* evaluatableConnection = (RMIServerConnection*)evaluatedObject;
-        return ([evaluatableConnection state] == RMIConnectionStateFinished);
-    }];
-    NSArray* closedConnections = [_connections filteredArrayUsingPredicate:closedConnectionsFilteringPredicate];
-    return closedConnections;
+- (void)stop
+{
+    [_connection close];
 }
 
 #pragma mark Registering methods

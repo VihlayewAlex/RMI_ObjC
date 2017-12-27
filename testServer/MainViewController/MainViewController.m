@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad
 {
+    NSLog(@"- (void)viewDidLoad");
     [super viewDidLoad];
     
     [self setupServer];
@@ -25,11 +26,16 @@
 
 - (void)setupServer
 {
+    NSLog(@"- (void)setupServer");
     // Instantiating RMI server
     _server = [[RMIServer alloc] init];
     // Registering selectors
     [_server registerSelector:@selector(testInstanceMethod) forObject:self];
     [_server registerSelector:@selector(testClassMethod) forClass:[self class]];
+}
+
+- (IBAction)connect:(NSButton *)sender {
+    [_server start];
 }
 
 - (void)testInstanceMethod

@@ -14,27 +14,78 @@
 
 @implementation RMIServerConnection
 
-- (instancetype)initWithAddress:(NSString*)address port:(NSInteger)port
+- (instancetype)initWithPort:(NSInteger)port
 {
+    NSLog(@"- (instancetype)initWithPort:(NSInteger)port");
     self = [super init];
     if (self) {
-        createSocket();
+        portno = port;
     }
     return self;
 }
 
-- (void)start
+long portno;
+int sockfd, newsockfd;
+socklen_t clilen;
+unsigned char buffer[256];
+struct sockaddr_in serv_addr, cli_addr;
+long n;
+
+- (void)open
 {
+    NSLog(@"Opening");
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSLog(@"Will open socket");
+        
+        sockfd = socket(AF_INET, SOCK_STREAM, 0);
+        if (sockfd < 0)
+        {
+            NSLog(@"ERROR opening socket");
+            assert(false);
+        }
+        bzero((char *) &serv_addr, sizeof(serv_addr));
+        serv_addr.sin_family = AF_INET;
+        serv_addr.sin_addr.s_addr = INADDR_ANY;
+        serv_addr.sin_port = htons(portno);
+        if (bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
+        {
+            NSLog(@"ERROR on binding");
+            assert(false);
+        }
+        listen(sockfd, 5);
+        clilen = sizeof(cli_addr);
+        newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
+        if (newsockfd < 0)
+        {
+            NSLog(@"ERROR on accept");
+            assert(false);
+        }
+        bzero(buffer,256);
+        
+        [_delegate didOpen];
+        
+        while (read(newsockfd, buffer, 255))
+        {
+            [_delegate didReceiveData:[NSData dataWithBytes:&buffer length:( sizeof(buffer) / sizeof(buffer[0]) )]];
+            printf("Here is the message: %s\n", buffer);
+            bzero(buffer,256);
+        }
+        
+        NSLog(@"Did open socket");
+    });
+    
+    NSLog(@"Opened");
 }
 
-- (void)finish
+- (void)close
 {
-  
-}
-
-void createSocket() {
-    // Add POSIX socket code
+    close(newsockfd);
+    close(sockfd);
+    
+    [_delegate didClose];
+    
+    NSLog(@"Closed");
 }
 
 @end
