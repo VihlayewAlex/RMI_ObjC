@@ -14,6 +14,8 @@
 
 @implementation RMIServerConnection
 
+#pragma mark Initialization
+
 - (instancetype)initWithPort:(NSInteger)port
 {
     NSLog(@"- (instancetype)initWithPort:(NSInteger)port");
@@ -27,14 +29,12 @@
 long portno;
 int sockfd, newsockfd;
 socklen_t clilen;
-unsigned char buffer[256];
+char buffer[256];
 struct sockaddr_in serv_addr, cli_addr;
 long n;
 
 - (void)open
 {
-    NSLog(@"Opening");
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSLog(@"Will open socket");
         
@@ -60,6 +60,8 @@ long n;
         {
             NSLog(@"ERROR on accept");
             assert(false);
+        } else {
+            NSLog(@"Accepted connection");
         }
         bzero(buffer,256);
         
@@ -67,15 +69,10 @@ long n;
         
         while (read(newsockfd, buffer, 255))
         {
-            [_delegate didReceiveData:[NSData dataWithBytes:&buffer length:( sizeof(buffer) / sizeof(buffer[0]) )]];
-            printf("Here is the message: %s\n", buffer);
+            [_delegate didReceiveString:buffer];
             bzero(buffer,256);
         }
-        
-        NSLog(@"Did open socket");
     });
-    
-    NSLog(@"Opened");
 }
 
 - (void)close

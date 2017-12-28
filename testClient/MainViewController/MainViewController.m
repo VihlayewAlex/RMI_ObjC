@@ -26,12 +26,22 @@
 - (void)setupClient
 {
     // Instantiating RMI server
-    _client = [[RMIClient alloc] init];
+    _client = [[RMIClient alloc] initWithHost:@"localhost" port:12345];
 
 }
 
-- (IBAction)connect:(NSButton *)sender {
+- (IBAction)connect:(NSButton *)sender
+{
     [_client connect];
+}
+
+- (IBAction)invokeClassMethod:(NSButton *)sender
+{
+    [_client invokeMethod:@"testClassMethod" ofTarget:RMIInvocationTargetTypeClass withName:@"MainViewController" withParametersDictionary:@{ @"key": @"value" }];
+}
+
+- (IBAction)invokeInstanceMethod:(NSButton *)sender {
+    [_client invokeMethod:@"testInstanceMethod" ofTarget:RMIInvocationTargetTypeObject withName:@"???" withParametersDictionary:@{ @"key": @"value" }];
 }
 
 @end

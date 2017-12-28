@@ -10,7 +10,7 @@
 
 @protocol RMIConnectionDelegate <NSObject>
 
-- (void)didReceiveData:(NSData*)receivedData;
+- (void)didReceiveString:(char*)receivedString;
 - (void)didOpen;
 - (void)didClose;
 

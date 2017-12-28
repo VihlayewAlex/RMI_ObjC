@@ -18,13 +18,13 @@
  * @param methodName A method name.
  * @param targetObject Message receiver object.
  */
-- (instancetype)initWithMethodName:(NSString*)methodName targetObject:(NSObject*)targetObject
+- (instancetype)initWithMethodName:(NSString*)methodName targetObjectUID:(NSString*)targetObject
 {
     self = [super init];
     if (self) {
         _targetType = RMIInvocationTargetTypeObject;
         _methodName = methodName;
-        _targetObject = targetObject;
+        _targetObjectUID = targetObject;
     }
     return self;
 }
@@ -35,13 +35,13 @@
  * @param methodName A method name.
  * @param targetClass Message receiver class.
  */
-- (instancetype)initWithMethodName:(NSString*)methodName targetClass:(Class)targetClass
+- (instancetype)initWithMethodName:(NSString*)methodName targetClassName:(NSString*)targetClass
 {
     self = [super init];
     if (self) {
         _targetType = RMIInvocationTargetTypeClass;
         _methodName = methodName;
-        _targetClassName = [targetClass className];
+        _targetClassName = targetClass;
     }
     return self;
 }
@@ -52,13 +52,11 @@
     NSLog(@"- (NSString*)invocationKey");
     switch (_targetType) {
         case RMIInvocationTargetTypeClass:
-            NSLog(@"RMIInvocationTargetTypeClass");
             return [[_targetClassName stringByAppendingString:@"+"]
                     stringByAppendingString:_methodName];
             break;
         case RMIInvocationTargetTypeObject:
-            NSLog(@"RMIInvocationTargetTypeObject %@", [_targetObject UID]);
-            return [[[_targetObject UID] stringByAppendingString:@"-"]
+            return [[_targetObjectUID stringByAppendingString:@"-"]
                     stringByAppendingString:_methodName];
             break;
         default:

@@ -35,7 +35,6 @@
 
 - (void)setupWindows
 {
-    NSLog(@"- (void)setupWindows");
     _mainWindowController = [[MainWindowController alloc] initWithNib];
     [_mainWindowController showWindow:nil];
 }

@@ -15,6 +15,11 @@
  */
 @property (strong, nonatomic) NSMutableDictionary* dispatchTable;
 
+/*!
+ * @brief Dictionary that is used for storing registered objects.
+ */
+@property (strong, nonatomic) NSMutableDictionary* registeredObjects;
+
 @end
 
 
@@ -24,15 +29,16 @@
 
 /*!
  * @discussion Default RMIServer initializer.
+ * @param port A port to start server on.
  * @return An initialized RMIServer object.
  */
-- (instancetype)init
+- (instancetype)initWithPort:(NSInteger)port
 {
-    NSLog(@"- (instancetype)init");
     self = [super init];
     if (self) {
         _dispatchTable = [[NSMutableDictionary alloc] init];
-        _connection = [[RMIServerConnection alloc] initWithPort:12345];
+        _registeredObjects = [[NSMutableDictionary alloc] init];
+        _connection = [[RMIServerConnection alloc] initWithPort:port];
         [_connection setDelegate:self];
     }
     return self;
@@ -60,9 +66,10 @@
  */
 - (void)registerSelector:(SEL)invocationSelector forObject:(NSObject*)targetObject {
     RMIInvocationInfo* invocationInfo = [[RMIInvocationInfo alloc] initWithMethodName:NSStringFromSelector(invocationSelector)
-                                                                         targetObject:targetObject];
+                                                                      targetObjectUID:[targetObject UID]];
     NSString* invocationKey = [invocationInfo invocationKey];
     [_dispatchTable setObject:invocationInfo forKey:invocationKey];
+    [_registeredObjects setObject:targetObject forKey:invocationKey];
 }
 
 /*!
@@ -73,7 +80,7 @@
  */
 - (void)registerSelector:(SEL)invocationSelector forClass:(Class)targetClass {
     RMIInvocationInfo* invocationInfo = [[RMIInvocationInfo alloc] initWithMethodName:NSStringFromSelector(invocationSelector)
-                                                                          targetClass:targetClass];
+                                                                      targetClassName:[targetClass className]];
     NSString* invocationKey = [invocationInfo invocationKey];
     [_dispatchTable setObject:invocationInfo forKey:invocationKey];
 }
@@ -96,16 +103,11 @@
  */
 - (void)invokeClassMethodByInfo:(RMIInvocationInfo*)invocationInfo withArguments:(NSDictionary* _Nullable)argumentsDictionary {
     Class class = NSClassFromString([invocationInfo targetClassName]);
+    NSLog(@"%@", class);
     SEL selector = NSSelectorFromString([invocationInfo methodName]);
-    
-    NSMethodSignature* methodSignature = [NSMethodSignature methodSignatureForSelector:selector];
-    NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-    if (argumentsDictionary) {
-        [invocation setArgument:(__bridge void * _Nonnull)(argumentsDictionary) atIndex:0];
-    }
-    
-    [invocation setTarget:class];
-    [invocation invoke];
+    NSLog(@"%@", selector);
+    [class performSelector:selector withObject:argumentsDictionary];
+    NSLog(@"Performed selector on target class");
 }
 
 /*!
@@ -113,17 +115,13 @@
  * @param invocationInfo for method to be called.
  */
 - (void)invokeObjectMethodByInfo:(RMIInvocationInfo*)invocationInfo withArguments:(NSDictionary* _Nullable)argumentsDictionary {
-    NSObject* object = [invocationInfo targetObject];
+    NSObject* object = [_registeredObjects objectForKey:[invocationInfo invocationKey]];
+    NSLog(@"%@", object);
+    NSLog(@"%@", [invocationInfo invocationKey]);
     SEL selector = NSSelectorFromString([invocationInfo methodName]);
-    
-    NSMethodSignature* methodSignature = [NSMethodSignature methodSignatureForSelector:selector];
-    NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-    if (argumentsDictionary) {
-        [invocation setArgument:(__bridge void * _Nonnull)(argumentsDictionary) atIndex:0];
-    }
-
-    [invocation setTarget:object];
-    [invocation invoke];
+    NSLog(@"%@", selector);
+    [object performSelector:selector withObject:argumentsDictionary];
+    NSLog(@"Performed selector on target object");
 }
 
 #pragma mark RMIConnectionDelegate
@@ -135,12 +133,28 @@
 
 - (void)didOpen
 {
-    NSLog(@"didOpen");
+    NSLog(@"Server did open");
 }
 
-- (void)didReceiveData:(NSData *)receivedData
+- (void)didReceiveString:(char *)receivedString
 {
-    NSLog(@"didReceiveData %@", receivedData);
+    NSLog(@"didReceiveData %s", receivedString);
+    NSString* string = [NSString stringWithCString:receivedString encoding:NSASCIIStringEncoding];
+    NSData* data = [string dataUsingEncoding:NSASCIIStringEncoding];
+    RMIInvocationRequest* request = [RMIRequestResponceMapper requestFromData:data];
+    RMIInvocationInfo* info;
+    switch ([request targetType])
+    {
+        case RMIInvocationTargetTypeClass:
+            info = [[RMIInvocationInfo alloc] initWithMethodName:[request methodName] targetClassName:(NSString* _Nonnull)NSClassFromString([request targetName])];
+            [self invokeClassMethodByInfo:info withArguments:[request parametersDictionary]];
+            break;
+            
+        case RMIInvocationTargetTypeObject:
+            info = [[RMIInvocationInfo alloc] initWithMethodName:[request methodName] targetObjectUID:[request targetName]];
+            [self invokeObjectMethodByInfo:info withArguments:[request parametersDictionary]];
+            break;
+    }
 }
 
 @end

@@ -31,7 +31,6 @@
 
 - (void)windowDidLoad
 {
-    NSLog(@"- (void)windowDidLoad");
     [super windowDidLoad];
     
     MainViewController* mainViewController = [[MainViewController alloc] init];

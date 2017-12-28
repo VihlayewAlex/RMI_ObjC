@@ -13,12 +13,20 @@
 
 @interface RMIRequestResponceMapper : NSObject
 
-+ (RMIInvocationRequest*)requestForMethodWithName:(NSString*)methodName withArguments:(NSArray*)argumentsArray receiverType:(RMIInvocationTargetType)receiverType;
+#pragma mark Client -> (Server)
 
 + (RMIInvocationRequest*)requestFromData:(NSData*)requestData;
 
+#pragma mark Server -> (Client)
+
 + (RMIInvocationResponce*)responceFromData:(NSData*)responceData;
 
+#pragma mark (Client) -> Server
+
 + (NSData*)dataFromInvocationRequest:(RMIInvocationRequest*)invocationRequest;
+
+#pragma mark (Server) -> Client
+
++ (NSData*)dataFromInvocationResponce:(RMIInvocationResponce*)invocationResponce;
 
 @end

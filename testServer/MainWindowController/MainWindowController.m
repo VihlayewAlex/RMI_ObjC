@@ -18,7 +18,6 @@
 
 - (instancetype)initWithNib
 {
-    NSLog(@"- (instancetype)initWithNib");
     NSString* nibName = NSStringFromClass([self class]);
     self = [super initWithWindowNibName:nibName];
     if (self) {
@@ -32,7 +31,6 @@
 
 - (void)windowDidLoad
 {
-    NSLog(@"- (void)windowDidLoad");
     [super windowDidLoad];
     
     MainViewController* mainViewController = [[MainViewController alloc] init];

@@ -33,9 +33,9 @@ typedef enum : NSUInteger {
 @property (assign, nonatomic) RMIInvocationTargetType targetType;
 
 /*!
- * @brief The message receiver object.
+ * @brief The message receiver object's UID.
  */
-@property (strong, nonatomic) NSObject* targetObject;
+@property (strong, nonatomic) NSString* targetObjectUID;
 
 /*!
  * @brief The message receiver class's name.
@@ -48,7 +48,7 @@ typedef enum : NSUInteger {
  * @param methodName A method name.
  * @param targetObject Message receiver object.
  */
-- (instancetype)initWithMethodName:(NSString*)methodName targetObject:(NSObject*)targetObject;
+- (instancetype)initWithMethodName:(NSString*)methodName targetObjectUID:(NSString*)targetObject;
 
 /*!
  * @discussion An iniitalizer for RMIInvocationInfo object.
@@ -56,7 +56,7 @@ typedef enum : NSUInteger {
  * @param methodName A method name.
  * @param targetClass Message receiver class.
  */
-- (instancetype)initWithMethodName:(NSString*)methodName targetClass:(Class)targetClass;
+- (instancetype)initWithMethodName:(NSString*)methodName targetClassName:(NSString*)targetClass;
 
 - (NSString*)invocationKey;
 

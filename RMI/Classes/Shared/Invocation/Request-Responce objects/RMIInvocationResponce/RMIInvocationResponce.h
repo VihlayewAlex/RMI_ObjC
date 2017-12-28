@@ -11,6 +11,7 @@
 @interface RMIInvocationResponce : NSObject
 
 @property (assign, nonatomic) NSInteger ID;
+@property (assign, nonatomic) BOOL success;
 @property (strong, nonatomic) NSDictionary* responceDictionary;
 
 @end

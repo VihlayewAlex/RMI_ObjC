@@ -12,6 +12,8 @@
 #import "RMIConnectionDelegate.h"
 #import "RMIServerConnection/RMIServerConnection.h"
 #import "RMIConnectionState.h"
+#import "RMIInvocationRequest.h"
+#import "RMIRequestResponceMapper.h"
 
 @interface RMIServer : NSObject <RMIConnectionDelegate>
 
@@ -26,9 +28,10 @@
 
 /*!
  * @discussion Default RMIServer initializer.
+ * @param port A port to start server on.
  * @return An initialized RMIServer object.
  */
-- (instancetype _Nullable )init;
+- (instancetype _Nonnull )initWithPort:(NSInteger)port;
 
 #pragma mark State control
 
