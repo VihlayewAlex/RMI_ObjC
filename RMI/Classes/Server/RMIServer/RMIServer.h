@@ -37,8 +37,9 @@
 
 /*!
  * @discussion Opens default server connection.
+ * @param completion A completion block to be executed on server start.
  */
-- (void)start;
+- (void)startWithCompletionBlock:(void(^ _Nonnull)(NSInteger))completion;
 
 /*!
  * @discussion Closes default server connection.

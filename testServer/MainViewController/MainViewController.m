@@ -10,6 +10,8 @@
 
 @interface MainViewController ()
 
+@property (weak) IBOutlet NSTextField *serverStatusLabel;
+
 @property (strong, nonatomic) RMIServer* server;
 
 @end
@@ -28,20 +30,23 @@
     // Instantiating RMI server
     _server = [[RMIServer alloc] initWithPort:12345];
     // Registering selectors
-    [_server registerSelector:@selector(testInstanceMethod) forObject:self];
-    [_server registerSelector:@selector(testClassMethod) forClass:[self class]];
+    [_server registerSelector:@selector(testInstanceMethodWithArgs:) forObject:self];
+    [_server registerSelector:@selector(testClassMethodWithArgs:) forClass:[self class]];
 }
 
 - (IBAction)connect:(NSButton *)sender {
-    [_server start];
+    [_server startWithCompletionBlock:^(NSInteger portNumber) {
+        __weak typeof(self) weakSelf = self;
+        [[weakSelf serverStatusLabel] setStringValue:[NSString stringWithFormat:@"Connected to: %lu", portNumber]];
+    }];
 }
 
-- (void)testInstanceMethod
+- (void)testInstanceMethodWithArgs:(NSDictionary*)arguments
 {
     NSLog(@"testInstanceMethod called");
 }
 
-+ (void)testClassMethod
++ (void)testClassMethodWithArgs:(NSDictionary*)arguments
 {
     NSLog(@"testClassMethod called");
 }

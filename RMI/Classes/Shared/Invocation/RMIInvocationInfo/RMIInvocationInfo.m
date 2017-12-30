@@ -23,8 +23,8 @@
     self = [super init];
     if (self) {
         _targetType = RMIInvocationTargetTypeObject;
-        _methodName = methodName;
-        _targetObjectUID = targetObject;
+        _methodName = [methodName copy];
+        _targetObjectUID = [targetObject copy];
     }
     return self;
 }
@@ -40,8 +40,8 @@
     self = [super init];
     if (self) {
         _targetType = RMIInvocationTargetTypeClass;
-        _methodName = methodName;
-        _targetClassName = targetClass;
+        _methodName = [methodName copy];
+        _targetClassName = [targetClass copy];
     }
     return self;
 }

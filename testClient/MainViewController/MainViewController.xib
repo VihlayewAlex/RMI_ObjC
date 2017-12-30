@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="portTextField" destination="Fd5-dd-3W1" id="TUl-Eb-oC3"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -16,19 +17,8 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Vv-G2-oeR">
-                    <rect key="frame" x="195" y="118" width="92" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="Connect" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Lcg-4m-MZy">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="connect:" target="-2" id="dgp-OJ-26P"/>
-                    </connections>
-                </button>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CK6-LJ-Jkw">
-                    <rect key="frame" x="161" y="85" width="160" height="32"/>
+                    <rect key="frame" x="14" y="169" width="160" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title=" Ivoke class method" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ut7-Vv-Aek">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -38,8 +28,41 @@
                         <action selector="invokeClassMethod:" target="-2" id="Jsv-lB-dbG"/>
                     </connections>
                 </button>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="VHm-Qx-0v0">
+                    <rect key="frame" x="20" y="230" width="440" height="22"/>
+                    <subviews>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fd5-dd-3W1">
+                            <rect key="frame" x="0.0" y="0.0" width="287" height="22"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Port number" drawsBackground="YES" id="6ra-tQ-gZB">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Vv-G2-oeR">
+                            <rect key="frame" x="297" y="-7" width="149" height="33"/>
+                            <buttonCell key="cell" type="push" title="Connect to server" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Lcg-4m-MZy">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="connect:" target="-2" id="dgp-OJ-26P"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Fd5-dd-3W1" secondAttribute="bottom" id="GCc-0r-8jA"/>
+                        <constraint firstItem="Fd5-dd-3W1" firstAttribute="top" secondItem="VHm-Qx-0v0" secondAttribute="top" id="Tef-5E-hgk"/>
+                        <constraint firstItem="0Vv-G2-oeR" firstAttribute="top" secondItem="VHm-Qx-0v0" secondAttribute="top" id="hyA-FW-fgN"/>
+                        <constraint firstAttribute="height" constant="22" id="lxJ-va-HWj"/>
+                        <constraint firstAttribute="trailing" secondItem="0Vv-G2-oeR" secondAttribute="trailing" id="oYQ-6N-olU"/>
+                        <constraint firstItem="0Vv-G2-oeR" firstAttribute="leading" secondItem="Fd5-dd-3W1" secondAttribute="trailing" constant="16" id="qTi-xt-NGV"/>
+                        <constraint firstAttribute="bottom" secondItem="0Vv-G2-oeR" secondAttribute="bottom" id="raA-7P-JJf"/>
+                        <constraint firstItem="Fd5-dd-3W1" firstAttribute="leading" secondItem="VHm-Qx-0v0" secondAttribute="leading" id="tjy-zi-vfr"/>
+                    </constraints>
+                </customView>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0y-3X-Yq6">
-                    <rect key="frame" x="151" y="46" width="181" height="32"/>
+                    <rect key="frame" x="14" y="130" width="181" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title=" Ivoke instance method" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6gB-9t-COu">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -50,6 +73,11 @@
                     </connections>
                 </button>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="VHm-Qx-0v0" secondAttribute="trailing" constant="20" id="2ei-1W-lzH"/>
+                <constraint firstItem="VHm-Qx-0v0" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="UlD-q6-df1"/>
+                <constraint firstItem="VHm-Qx-0v0" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="lNp-VT-qJd"/>
+            </constraints>
         </customView>
     </objects>
 </document>

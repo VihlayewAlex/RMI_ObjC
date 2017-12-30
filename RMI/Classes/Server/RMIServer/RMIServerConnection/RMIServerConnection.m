@@ -22,6 +22,7 @@
     self = [super init];
     if (self) {
         portno = port;
+        _port = port;
     }
     return self;
 }
@@ -36,43 +37,61 @@ long n;
 - (void)open
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSLog(@"Will open socket");
-        
-        sockfd = socket(AF_INET, SOCK_STREAM, 0);
-        if (sockfd < 0)
-        {
-            NSLog(@"ERROR opening socket");
-            assert(false);
+        BOOL success = NO;
+        while (!success) {
+            success = [self openSocket];
+            if (!success) {
+                NSInteger port = arc4random_uniform(9999);
+                portno = port;
+                _port = port;
+            }
         }
-        bzero((char *) &serv_addr, sizeof(serv_addr));
-        serv_addr.sin_family = AF_INET;
-        serv_addr.sin_addr.s_addr = INADDR_ANY;
-        serv_addr.sin_port = htons(portno);
-        if (bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
-        {
-            NSLog(@"ERROR on binding");
-            assert(false);
-        }
-        listen(sockfd, 5);
-        clilen = sizeof(cli_addr);
-        newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
-        if (newsockfd < 0)
-        {
-            NSLog(@"ERROR on accept");
-            assert(false);
-        } else {
-            NSLog(@"Accepted connection");
-        }
-        bzero(buffer,256);
-        
-        [_delegate didOpen];
-        
-        while (read(newsockfd, buffer, 255))
-        {
-            [_delegate didReceiveString:buffer];
-            bzero(buffer,256);
-        }
+        [self listedOnSocket];
     });
+}
+
+- (BOOL)openSocket
+{
+    NSLog(@"Will open socket");
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd < 0)
+    {
+        NSLog(@"ERROR opening socket");
+        return NO;
+    }
+    bzero((char *) &serv_addr, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_addr.s_addr = INADDR_ANY;
+    serv_addr.sin_port = htons(portno);
+    if (bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
+    {
+        NSLog(@"ERROR on binding");
+        return NO;
+    }
+    listen(sockfd, 5);
+    clilen = sizeof(cli_addr);
+    
+    [_delegate didOpen];
+    return YES;
+}
+
+- (void)listedOnSocket
+{
+    newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
+    if (newsockfd < 0)
+    {
+        NSLog(@"ERROR on accept");
+        //assert(false);
+    } else {
+        NSLog(@"Accepted connection");
+    }
+    bzero(buffer,256);
+    
+    while (read(newsockfd, buffer, 255))
+    {
+        [_delegate didReceiveString:buffer];
+        bzero(buffer,256);
+    }
 }
 
 - (void)close

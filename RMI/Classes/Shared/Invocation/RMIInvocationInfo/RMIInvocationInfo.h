@@ -54,9 +54,9 @@ typedef enum : NSUInteger {
  * @discussion An iniitalizer for RMIInvocationInfo object.
  These objects are used to represent information about method and the receiver.
  * @param methodName A method name.
- * @param targetClass Message receiver class.
+ * @param targetClassName Message receiver class name.
  */
-- (instancetype)initWithMethodName:(NSString*)methodName targetClassName:(NSString*)targetClass;
+- (instancetype)initWithMethodName:(NSString*)methodName targetClassName:(NSString*)targetClassName;
 
 - (NSString*)invocationKey;
 

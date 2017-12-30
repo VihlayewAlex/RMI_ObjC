@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="serverStatusLabel" destination="pbo-p0-JSS" id="5x5-QN-upw"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -16,18 +17,43 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ViK-lM-Cs6">
-                    <rect key="frame" x="205" y="118" width="70" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="m9S-UA-8Ji">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="connect:" target="-2" id="pgw-vI-2vO"/>
-                    </connections>
-                </button>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="hLZ-0R-6NZ">
+                    <rect key="frame" x="190" y="113" width="100" height="46"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ViK-lM-Cs6">
+                            <rect key="frame" x="-6" y="18" width="112" height="32"/>
+                            <buttonCell key="cell" type="push" title="Start server" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="m9S-UA-8Ji">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="connect:" target="-2" id="pgw-vI-2vO"/>
+                            </connections>
+                        </button>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pbo-p0-JSS">
+                            <rect key="frame" x="-2" y="0.0" width="104" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Not started yet" id="Wv9-0v-wc5">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="ViK-lM-Cs6" firstAttribute="top" secondItem="hLZ-0R-6NZ" secondAttribute="top" id="7VA-b3-y25"/>
+                        <constraint firstItem="pbo-p0-JSS" firstAttribute="top" secondItem="ViK-lM-Cs6" secondAttribute="bottom" constant="8" id="7fE-jw-WeF"/>
+                        <constraint firstAttribute="bottom" secondItem="pbo-p0-JSS" secondAttribute="bottom" id="H0P-zj-337"/>
+                        <constraint firstItem="ViK-lM-Cs6" firstAttribute="leading" secondItem="hLZ-0R-6NZ" secondAttribute="leading" id="Y6f-NG-8oS"/>
+                        <constraint firstItem="pbo-p0-JSS" firstAttribute="leading" secondItem="hLZ-0R-6NZ" secondAttribute="leading" id="cUi-uk-x0y"/>
+                        <constraint firstAttribute="trailing" secondItem="pbo-p0-JSS" secondAttribute="trailing" id="wgK-ky-0oV"/>
+                        <constraint firstAttribute="trailing" secondItem="ViK-lM-Cs6" secondAttribute="trailing" id="yWf-2F-Vwg"/>
+                    </constraints>
+                </customView>
             </subviews>
+            <constraints>
+                <constraint firstItem="hLZ-0R-6NZ" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="2ey-0F-JBN"/>
+                <constraint firstItem="hLZ-0R-6NZ" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="HUj-EX-zhS"/>
+            </constraints>
         </customView>
     </objects>
 </document>

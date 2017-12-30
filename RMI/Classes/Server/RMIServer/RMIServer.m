@@ -20,6 +20,11 @@
  */
 @property (strong, nonatomic) NSMutableDictionary* registeredObjects;
 
+/*
+ * @brief A completion block to be executed on server socket opening
+ */
+@property (nonatomic, copy, nonnull) void (^connectinCompletionBlock)(NSInteger);
+
 @end
 
 
@@ -46,8 +51,9 @@
 
 #pragma mark Connection
 
-- (void)start
+- (void)startWithCompletionBlock:(void(^)(NSInteger portNumber))completion
 {
+    _connectinCompletionBlock = completion;
     [_connection open];
 }
 
@@ -70,6 +76,8 @@
     NSString* invocationKey = [invocationInfo invocationKey];
     [_dispatchTable setObject:invocationInfo forKey:invocationKey];
     [_registeredObjects setObject:targetObject forKey:invocationKey];
+    // Logging selector registration
+    NSLog(@"Registered instance method selector: %@", NSStringFromSelector(invocationSelector));
 }
 
 /*!
@@ -83,6 +91,8 @@
                                                                       targetClassName:[targetClass className]];
     NSString* invocationKey = [invocationInfo invocationKey];
     [_dispatchTable setObject:invocationInfo forKey:invocationKey];
+    // Logging selector registration
+    NSLog(@"Registered class method selector: %@", NSStringFromSelector(invocationSelector));
 }
 
 #pragma mark Removing methods
@@ -101,12 +111,22 @@
  * @discussion A method for invoking class methods that are reristered to RMI server.
  * @param invocationInfo for method to be called.
  */
-- (void)invokeClassMethodByInfo:(RMIInvocationInfo*)invocationInfo withArguments:(NSDictionary* _Nullable)argumentsDictionary {
-    Class class = NSClassFromString([invocationInfo targetClassName]);
-    NSLog(@"%@", class);
-    SEL selector = NSSelectorFromString([invocationInfo methodName]);
-    NSLog(@"%@", selector);
-    [class performSelector:selector withObject:argumentsDictionary];
+- (void)invokeClassMethodByInfo:(RMIInvocationInfo*)invocationInfo withArguments:(NSDictionary* _Nullable)argumentsDictionary
+{
+    // Getting target class
+    Class targetClass = NSClassFromString([invocationInfo targetClassName]);
+    NSLog(@"Got class: %@", targetClass);
+    // Getting target's method selector
+    SEL methodSelector = NSSelectorFromString([invocationInfo methodName]);
+    NSLog(@"Will invoke class method by selector: %@", NSStringFromSelector(methodSelector));
+    // Getting method signature by selector
+    NSMethodSignature* methodSignature = [targetClass methodSignatureForSelector:methodSelector];
+    // Instantiating NSInvocation
+    NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+    [invocation setSelector:methodSelector];
+    [invocation setTarget:targetClass];
+    [invocation setArgument:&argumentsDictionary atIndex:2];
+    [invocation invoke];
     NSLog(@"Performed selector on target class");
 }
 
@@ -114,13 +134,22 @@
  * @discussion A method for invoking instance methods that are reristered to RMI server.
  * @param invocationInfo for method to be called.
  */
-- (void)invokeObjectMethodByInfo:(RMIInvocationInfo*)invocationInfo withArguments:(NSDictionary* _Nullable)argumentsDictionary {
-    NSObject* object = [_registeredObjects objectForKey:[invocationInfo invocationKey]];
-    NSLog(@"%@", object);
-    NSLog(@"%@", [invocationInfo invocationKey]);
-    SEL selector = NSSelectorFromString([invocationInfo methodName]);
-    NSLog(@"%@", selector);
-    [object performSelector:selector withObject:argumentsDictionary];
+- (void)invokeObjectMethodByInfo:(RMIInvocationInfo*)invocationInfo withArguments:(NSDictionary* _Nullable)argumentsDictionary
+{
+    // Getting target object
+    NSObject* targetObject = [_registeredObjects objectForKey:[invocationInfo invocationKey]];
+    NSLog(@"Got object: %@", targetObject);
+    // Getting target's method selector
+    SEL methodSelector = NSSelectorFromString([invocationInfo methodName]);
+    NSLog(@"Will invoke instance method by selector: %@", NSStringFromSelector(methodSelector));
+    // Getting method signature by selector
+    NSMethodSignature* methodSignature = [targetObject methodSignatureForSelector:methodSelector];
+    // Instantiating NSInvocation
+    NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+    [invocation setSelector:methodSelector];
+    [invocation setTarget:targetObject];
+    [invocation setArgument:&argumentsDictionary atIndex:2];
+    [invocation invoke];
     NSLog(@"Performed selector on target object");
 }
 
@@ -133,6 +162,9 @@
 
 - (void)didOpen
 {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _connectinCompletionBlock([_connection port]);
+    });
     NSLog(@"Server did open");
 }
 
@@ -142,17 +174,16 @@
     NSString* string = [NSString stringWithCString:receivedString encoding:NSASCIIStringEncoding];
     NSData* data = [string dataUsingEncoding:NSASCIIStringEncoding];
     RMIInvocationRequest* request = [RMIRequestResponceMapper requestFromData:data];
-    RMIInvocationInfo* info;
+    RMIInvocationInfo* info = [[RMIInvocationInfo alloc] initWithMethodName:[request methodName] targetClassName:[request targetName]];;
     switch ([request targetType])
     {
         case RMIInvocationTargetTypeClass:
-            info = [[RMIInvocationInfo alloc] initWithMethodName:[request methodName] targetClassName:(NSString* _Nonnull)NSClassFromString([request targetName])];
-            [self invokeClassMethodByInfo:info withArguments:[request parametersDictionary]];
+            [self invokeClassMethodByInfo:info
+                            withArguments:[request parametersDictionary]];
             break;
-            
         case RMIInvocationTargetTypeObject:
-            info = [[RMIInvocationInfo alloc] initWithMethodName:[request methodName] targetObjectUID:[request targetName]];
-            [self invokeObjectMethodByInfo:info withArguments:[request parametersDictionary]];
+            [self invokeObjectMethodByInfo:info
+                             withArguments:[request parametersDictionary]];
             break;
     }
 }

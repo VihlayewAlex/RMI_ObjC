@@ -18,6 +18,8 @@
 
 @property (assign, nonatomic) RMIConnectionState state;
 
+@property (assign, nonatomic) NSInteger port;
+
 /*!
  * @discussion A constructor for initializing RMIConnection with a given port
  * @param port A target port to start on.

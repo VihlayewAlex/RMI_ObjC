@@ -10,6 +10,8 @@
 
 @interface MainViewController ()
 
+@property (weak) IBOutlet NSTextField *portTextField;
+
 @property (strong, nonatomic) RMIClient* client;
 
 @end
@@ -20,28 +22,24 @@
 {
     [super viewDidLoad];
     
-    [self setupClient];
-}
-
-- (void)setupClient
-{
-    // Instantiating RMI server
-    _client = [[RMIClient alloc] initWithHost:@"localhost" port:12345];
-
+    
 }
 
 - (IBAction)connect:(NSButton *)sender
 {
+    if ([[_portTextField stringValue] isEqualToString:@""]) { return; }
+    NSInteger portNumber = [[_portTextField stringValue] integerValue];
+    _client = [[RMIClient alloc] initWithHost:@"localhost" port:portNumber];
     [_client connect];
 }
 
 - (IBAction)invokeClassMethod:(NSButton *)sender
 {
-    [_client invokeMethod:@"testClassMethod" ofTarget:RMIInvocationTargetTypeClass withName:@"MainViewController" withParametersDictionary:@{ @"key": @"value" }];
+    [_client invokeMethod:@"testClassMethodWithArgs:" ofTarget:RMIInvocationTargetTypeClass withName:@"MainViewController" withParametersDictionary:@{ @"key": @"value" }];
 }
 
 - (IBAction)invokeInstanceMethod:(NSButton *)sender {
-    [_client invokeMethod:@"testInstanceMethod" ofTarget:RMIInvocationTargetTypeObject withName:@"???" withParametersDictionary:@{ @"key": @"value" }];
+    [_client invokeMethod:@"testInstanceMethodWithArgs:" ofTarget:RMIInvocationTargetTypeObject withName:@"???" withParametersDictionary:@{ @"key": @"value" }];
 }
 
 @end
