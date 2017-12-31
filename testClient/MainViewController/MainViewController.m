@@ -35,7 +35,7 @@
 
 - (IBAction)invokeClassMethod:(NSButton *)sender
 {
-    [_client invokeMethod:@"testClassMethodWithArgs:" ofTarget:RMIInvocationTargetTypeClass withName:@"MainViewController" withParametersDictionary:@{ @"key": @"value" }];
+    [_client invokeMethod:@"testClassMethodWithArgs:" ofTarget:RMIInvocationTargetTypeClass withName:@"MainViewController" withParametersDictionary:nil];
 }
 
 - (IBAction)invokeInstanceMethod:(NSButton *)sender {

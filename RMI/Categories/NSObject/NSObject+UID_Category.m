@@ -15,6 +15,9 @@
 
 @implementation NSObject (UID_Category)
 
+/*!
+ * @discussion NSObject UID getter.
+ */
 - (NSString*)UID
 {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];

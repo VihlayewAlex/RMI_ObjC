@@ -16,6 +16,6 @@ FOUNDATION_EXPORT const unsigned char RMIVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <RMI/PublicHeader.h>
 
-#import "RMIServer.h"
-#import "RMIClient.h"
+#import "RMIServer.h" // Used to register methods and receivers and invoke them on remote requests from clients
+#import "RMIClient.h" // Used to connect to remote host and to invoke it's methods with a set of parameters
 

@@ -34,23 +34,39 @@
 
 #pragma mark Connection
 
+/*!
+ * @discussion Starts connection to the server.
+ */
 - (void)connect
 {
     [_connection open];
 }
 
+/*!
+ * @discussion Stops connection to the server.
+ */
 - (void)disconnect
 {
     [_connection close];
 }
 
-- (void)writeString:(char*)data
+/*!
+ * @discussion Sends data to server.
+ */
+- (void)writeString:(const char* _Nullable)data
 {
     [_connection writeData:data];
 }
 
 #pragma mark Method invocation
 
+/*!
+ * @discussion Invokes remote class / object method on the connected server
+ * @param methodName A string representation of remote method selector
+ * @param targetType A type of remote message receiver
+ * @param targetName A name of a message receiver
+ * @param parametersDictionary A discionary of parameters to pass to remote method
+ */
 - (void)invokeMethod:(NSString*)methodName ofTarget:(RMIInvocationTargetType)targetType withName:(NSString*)targetName withParametersDictionary:(NSDictionary*)parametersDictionary
 {
     RMIInvocationRequest* invocationRequest = [[RMIInvocationRequest alloc] init];

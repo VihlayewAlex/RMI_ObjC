@@ -9,6 +9,9 @@
 #ifndef RMIConnectionState_h
 #define RMIConnectionState_h
 
+/*!
+ * @discussion Represents a state of the connection
+ */
 typedef enum : NSUInteger {
     RMIConnectionStateNotStarted,
     RMIConnectionStateConnecting,

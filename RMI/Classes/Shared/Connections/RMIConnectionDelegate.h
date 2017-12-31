@@ -10,8 +10,20 @@
 
 @protocol RMIConnectionDelegate <NSObject>
 
+/*!
+ * @discussion Called when received some data
+ * @param receivedString pointer to a received data
+ */
 - (void)didReceiveString:(char*)receivedString;
+
+/*!
+ * @discussion Called when connection is opened
+ */
 - (void)didOpen;
+
+/*!
+ * @discussion Called when connection is closed
+ */
 - (void)didClose;
 
 @end

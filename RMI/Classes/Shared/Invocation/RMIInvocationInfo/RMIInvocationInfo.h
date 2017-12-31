@@ -58,6 +58,9 @@ typedef enum : NSUInteger {
  */
 - (instancetype)initWithMethodName:(NSString*)methodName targetClassName:(NSString*)targetClassName;
 
+/*!
+ * @discussion A unique key that identifies receiver and it's target method
+ */
 - (NSString*)invocationKey;
 
 @end

@@ -14,11 +14,24 @@
 
 @interface RMIServerConnection : NSObject
 
+#pragma mark Properties
+
+/*!
+ * @discussion Keeps reference to a delegate object.
+ */
 @property (weak, nonatomic) id<RMIConnectionDelegate> delegate;
 
+/*!
+ * @discussion State of connection.
+ */
 @property (assign, nonatomic) RMIConnectionState state;
 
+/*!
+ * @discussion Connection port.
+ */
 @property (assign, nonatomic) NSInteger port;
+
+#pragma mark Initialization
 
 /*!
  * @discussion A constructor for initializing RMIConnection with a given port
@@ -26,8 +39,10 @@
  */
 - (instancetype)initWithPort:(NSInteger)port;
 
+#pragma mark Opening connection
+
 /*!
- * @discussion Opens a connection.
+ * @discussion Trying to open a connection on specified port or o other free port.
  */
 - (void)open;
 

@@ -35,8 +35,8 @@
 }
 
 - (IBAction)connect:(NSButton *)sender {
+    __weak typeof(self) weakSelf = self;
     [_server startWithCompletionBlock:^(NSInteger portNumber) {
-        __weak typeof(self) weakSelf = self;
         [[weakSelf serverStatusLabel] setStringValue:[NSString stringWithFormat:@"Connected to: %lu", portNumber]];
     }];
 }

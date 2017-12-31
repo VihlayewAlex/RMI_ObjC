@@ -12,6 +12,11 @@
 
 #pragma mark Initialization
 
+/*!
+ * @discussion A constructor for initializing RMIConnection with a given host and port
+ * @param host A host to connect to.
+ * @param port A target port connect.
+ */
 - (instancetype)initWithHost:(NSString*)host port:(NSInteger)port
 {
     self = [super init];
@@ -30,6 +35,9 @@ struct sockaddr_in cl_serv_addr;
 struct hostent *cl_server;
 char cl_buffer[256];
 
+/*!
+ * @discussion Opens a connection.
+ */
 - (void)open
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -63,12 +71,19 @@ char cl_buffer[256];
     });
 }
 
+/*!
+ * @discussion Closes a connection.
+ */
 - (void)close
 {
     close(cl_sockfd);
 }
 
-- (void)writeData:(char*)data
+/*!
+ * @discussion Writes data to the socket
+ * @param data A data to be written.
+ */
+- (void)writeData:(const char* _Nullable)data
 {
     strcpy(cl_buffer, data);
     NSLog(@"Will write %s, %lu", cl_buffer, strlen(cl_buffer));

@@ -16,7 +16,7 @@
 
 @interface RMIClientConnection : NSObject
 
-@property (weak, nonatomic) id<RMIConnectionDelegate> delegate;
+@property (weak, nonatomic, nullable) id <RMIConnectionDelegate> delegate;
 
 @property (assign, nonatomic) RMIConnectionState state;
 
@@ -25,7 +25,7 @@
  * @param host A host to connect to.
  * @param port A target port connect.
  */
-- (instancetype)initWithHost:(NSString*)host port:(NSInteger)port;
+- (instancetype _Nonnull)initWithHost:(NSString* _Nonnull)host port:(NSInteger)port;
 
 /*!
  * @discussion Opens a connection.
@@ -41,6 +41,6 @@
  * @discussion Writes data to the socket
  * @param data A data to be written.
  */
-- (void)writeData:(char*)data;
+- (void)writeData:(const char* _Nullable)data;
 
 @end

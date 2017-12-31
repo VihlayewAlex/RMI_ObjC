@@ -10,7 +10,7 @@
 #import "RMIClientConnection.h"
 #import "RMIConnectionDelegate.h"
 #import "RMIInvocationRequest.h"
-#include "RMIRequestResponceMapper.h"
+#import "RMIRequestResponceMapper.h"
 
 @interface RMIClient : NSObject <RMIConnectionDelegate>
 
@@ -20,16 +20,32 @@
  * @discussion Default RMIServer initializer.
  * @return An initialized RMIServer object.
  */
-- (instancetype)initWithHost:(NSString*)host port:(NSInteger)port;
+- (instancetype _Nonnull )initWithHost:(NSString* _Nonnull)host port:(NSInteger)port;
 
+/*!
+ * @discussion Starts connection to the server.
+ */
 - (void)connect;
 
+/*!
+ * @discussion Stops connection to the server.
+ */
 - (void)disconnect;
 
-- (void)writeString:(char*)data;
+/*!
+ * @discussion Sends data to server.
+ */
+- (void)writeString:(const char* _Nullable)data;
 
 #pragma mark Method invocation
 
-- (void)invokeMethod:(NSString*)methodName ofTarget:(RMIInvocationTargetType)targetType withName:(NSString*)targetName withParametersDictionary:(NSDictionary*)parametersDictionary;
+/*!
+ * @discussion Invokes remote class / object method on the connected server
+ * @param methodName A string representation of remote method selector
+ * @param targetType A type of remote message receiver
+ * @param targetName A name of a message receiver
+ * @param parametersDictionary A discionary of parameters to pass to remote method
+ */
+- (void)invokeMethod:(NSString* _Nonnull)methodName ofTarget:(RMIInvocationTargetType)targetType withName:(NSString* _Nonnull)targetName withParametersDictionary:(NSDictionary* _Nullable)parametersDictionary;
 
 @end

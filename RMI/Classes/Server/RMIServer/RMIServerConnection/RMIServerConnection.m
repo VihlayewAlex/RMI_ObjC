@@ -16,6 +16,10 @@
 
 #pragma mark Initialization
 
+/*!
+ * @discussion A constructor for initializing RMIConnection with a given port
+ * @param port A target port to start on.
+ */
 - (instancetype)initWithPort:(NSInteger)port
 {
     NSLog(@"- (instancetype)initWithPort:(NSInteger)port");
@@ -27,6 +31,8 @@
     return self;
 }
 
+#pragma mark Opening connection
+
 long portno;
 int sockfd, newsockfd;
 socklen_t clilen;
@@ -34,6 +40,9 @@ char buffer[256];
 struct sockaddr_in serv_addr, cli_addr;
 long n;
 
+/*!
+ * @discussion Trying to open a connection on specified port or o other free port.
+ */
 - (void)open
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -50,6 +59,9 @@ long n;
     });
 }
 
+/*!
+ * @discussion Opens a socket.
+ */
 - (BOOL)openSocket
 {
     NSLog(@"Will open socket");
@@ -75,13 +87,15 @@ long n;
     return YES;
 }
 
+/*!
+ * @discussion Starts listening on socket.
+ */
 - (void)listedOnSocket
 {
     newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
     if (newsockfd < 0)
     {
         NSLog(@"ERROR on accept");
-        //assert(false);
     } else {
         NSLog(@"Accepted connection");
     }
@@ -94,6 +108,9 @@ long n;
     }
 }
 
+/*!
+ * @discussion Closes a connection.
+ */
 - (void)close
 {
     close(newsockfd);

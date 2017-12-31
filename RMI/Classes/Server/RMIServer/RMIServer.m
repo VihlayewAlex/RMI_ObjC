@@ -51,12 +51,19 @@
 
 #pragma mark Connection
 
+/*!
+ * @discussion Opens default server connection.
+ * @param completion A completion block to be executed on server start.
+ */
 - (void)startWithCompletionBlock:(void(^)(NSInteger portNumber))completion
 {
     _connectinCompletionBlock = completion;
     [_connection open];
 }
 
+/*!
+ * @discussion Closes default server connection.
+ */
 - (void)stop
 {
     [_connection close];

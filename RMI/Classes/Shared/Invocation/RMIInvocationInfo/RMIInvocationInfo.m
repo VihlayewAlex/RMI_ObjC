@@ -48,6 +48,9 @@
 
 #pragma mark Getters
 
+/*!
+ * @discussion A unique key that identifies receiver and it's target method
+ */
 - (NSString*)invocationKey {
     NSLog(@"- (NSString*)invocationKey");
     switch (_targetType) {
