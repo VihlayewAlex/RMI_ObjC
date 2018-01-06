@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CommonCrypto/CommonDigest.h>
+#import <objc/runtime.h>
 
 @interface NSObject (UID_Category)
 

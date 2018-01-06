@@ -9,6 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "RMI.h"
 
-@interface MainViewController : NSViewController
+@interface MainViewController : NSViewController <RMIClientDelegate>
 
 @end

@@ -11,8 +11,11 @@
 #import "RMIConnectionDelegate.h"
 #import "RMIInvocationRequest.h"
 #import "RMIRequestResponceMapper.h"
+#import "RMIClientDelegate.h"
 
 @interface RMIClient : NSObject <RMIConnectionDelegate>
+
+@property (weak, nonatomic, nullable) id<RMIClientDelegate> delegate;
 
 #pragma mark Initialization
 
@@ -46,6 +49,6 @@
  * @param targetName A name of a message receiver
  * @param parametersDictionary A discionary of parameters to pass to remote method
  */
-- (void)invokeMethod:(NSString* _Nonnull)methodName ofTarget:(RMIInvocationTargetType)targetType withName:(NSString* _Nonnull)targetName withParametersDictionary:(NSDictionary* _Nullable)parametersDictionary;
+- (void)invokeMethod:(NSString*_Nonnull)methodName ofTarget:(RMIInvocationTargetType)targetType withName:(NSString*_Nonnull)targetName withParametersDictionary:(NSDictionary*_Nullable)parametersDictionary withCompletionBlock:(void (^ _Nullable)(RMIInvocationResponce* _Nullable responce))completion;
 
 @end

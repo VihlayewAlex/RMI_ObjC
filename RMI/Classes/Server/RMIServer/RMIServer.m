@@ -117,8 +117,9 @@
 /*!
  * @discussion A method for invoking class methods that are reristered to RMI server.
  * @param invocationInfo for method to be called.
+ * @param requestID An ID used to map request to a responce.
  */
-- (void)invokeClassMethodByInfo:(RMIInvocationInfo*)invocationInfo withArguments:(NSDictionary* _Nullable)argumentsDictionary
+- (void)invokeClassMethodByInfo:(RMIInvocationInfo*)invocationInfo forRequestWithID:(NSInteger)requestID withArguments:(NSDictionary* _Nullable)argumentsDictionary
 {
     // Getting target class
     Class targetClass = NSClassFromString([invocationInfo targetClassName]);
@@ -134,18 +135,27 @@
     [invocation setTarget:targetClass];
     [invocation setArgument:&argumentsDictionary atIndex:2];
     [invocation invoke];
+    
+    NSDictionary* result;
+    [invocation getReturnValue:&result];
+    
+    if (result) {
+        [self sendResponceForRequestWithID:requestID withSuccess:YES withArguments:result];
+    }
+    
     NSLog(@"Performed selector on target class");
 }
 
 /*!
  * @discussion A method for invoking instance methods that are reristered to RMI server.
  * @param invocationInfo for method to be called.
+ * @param requestID An ID used to map request to a responce.
  */
-- (void)invokeObjectMethodByInfo:(RMIInvocationInfo*)invocationInfo withArguments:(NSDictionary* _Nullable)argumentsDictionary
+- (void)invokeObjectMethodByInfo:(RMIInvocationInfo*)invocationInfo forRequestWithID:(NSInteger)requestID withArguments:(NSDictionary* _Nullable)argumentsDictionary
 {
     // Getting target object
     NSObject* targetObject = [_registeredObjects objectForKey:[invocationInfo invocationKey]];
-    NSLog(@"Got object: %@", targetObject);
+    NSLog(@"Got object: %@ for key: %@", targetObject, [invocationInfo invocationKey]);
     // Getting target's method selector
     SEL methodSelector = NSSelectorFromString([invocationInfo methodName]);
     NSLog(@"Will invoke instance method by selector: %@", NSStringFromSelector(methodSelector));
@@ -156,8 +166,34 @@
     [invocation setSelector:methodSelector];
     [invocation setTarget:targetObject];
     [invocation setArgument:&argumentsDictionary atIndex:2];
-    [invocation invoke];
-    NSLog(@"Performed selector on target object");
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [invocation invoke];
+        
+        NSDictionary* result;
+        [invocation getReturnValue:&result];
+        
+        if (result) {
+            [self sendResponceForRequestWithID:requestID withSuccess:YES withArguments:result];
+        }
+        
+        NSLog(@"Performed selector on target object");
+    });
+}
+
+#pragma mark Responding
+
+- (void)sendResponceForRequestWithID:(NSInteger)ID withSuccess:(BOOL)success withArguments:(NSDictionary*)arguments
+{
+    RMIInvocationResponce* responce = [[RMIInvocationResponce alloc] init];
+    [responce setID:ID];
+    [responce setSuccess:success];
+    [responce setResponceDictionary:arguments];
+    
+    NSData* responceData = [RMIRequestResponceMapper dataFromInvocationResponce:responce];
+    NSString* dataString = [[NSString alloc] initWithData:responceData encoding:NSUTF8StringEncoding];
+    
+    [_connection writeData:[dataString cStringUsingEncoding:NSASCIIStringEncoding]];
 }
 
 #pragma mark RMIConnectionDelegate
@@ -181,15 +217,19 @@
     NSString* string = [NSString stringWithCString:receivedString encoding:NSASCIIStringEncoding];
     NSData* data = [string dataUsingEncoding:NSASCIIStringEncoding];
     RMIInvocationRequest* request = [RMIRequestResponceMapper requestFromData:data];
-    RMIInvocationInfo* info = [[RMIInvocationInfo alloc] initWithMethodName:[request methodName] targetClassName:[request targetName]];;
+    RMIInvocationInfo* info;
     switch ([request targetType])
     {
         case RMIInvocationTargetTypeClass:
+            info = [[RMIInvocationInfo alloc] initWithMethodName:[request methodName] targetClassName:[request targetName]];
             [self invokeClassMethodByInfo:info
+                         forRequestWithID:[request ID]
                             withArguments:[request parametersDictionary]];
             break;
         case RMIInvocationTargetTypeObject:
+            info = [[RMIInvocationInfo alloc] initWithMethodName:[request methodName] targetObjectUID:[request targetName]];
             [self invokeObjectMethodByInfo:info
+                          forRequestWithID:[request ID]
                              withArguments:[request parametersDictionary]];
             break;
     }

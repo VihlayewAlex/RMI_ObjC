@@ -65,8 +65,15 @@ char cl_buffer[256];
             assert(false);
         } else {
             NSLog(@"Connected");
+            [_delegate didOpen];
         }
-        bzero(cl_buffer, 256);
+        bzero(cl_buffer,256);
+        
+        while (read(cl_sockfd, cl_buffer, 255))
+        {
+            [_delegate didReceiveString:cl_buffer];
+            bzero(cl_buffer,256);
+        }
         NSLog(@"Opened");
     });
 }

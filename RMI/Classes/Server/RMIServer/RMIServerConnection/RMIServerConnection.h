@@ -19,7 +19,7 @@
 /*!
  * @discussion Keeps reference to a delegate object.
  */
-@property (weak, nonatomic) id<RMIConnectionDelegate> delegate;
+@property (weak, nonatomic, nullable) id<RMIConnectionDelegate> delegate;
 
 /*!
  * @discussion State of connection.
@@ -37,7 +37,7 @@
  * @discussion A constructor for initializing RMIConnection with a given port
  * @param port A target port to start on.
  */
-- (instancetype)initWithPort:(NSInteger)port;
+- (instancetype _Nonnull )initWithPort:(NSInteger)port;
 
 #pragma mark Opening connection
 
@@ -50,5 +50,10 @@
  * @discussion Closes a connection.
  */
 - (void)close;
+
+/*!
+ * @discussion Sends data to client.
+ */
+- (void)writeData:(const char* _Nullable)data;
 
 @end

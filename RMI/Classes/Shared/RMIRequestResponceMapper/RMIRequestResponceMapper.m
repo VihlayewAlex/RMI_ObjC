@@ -85,8 +85,8 @@
 
 /*!
  * @discussion Translates RMIInvocationResponce to an NSData.
- * @param invocationResponce responce to convert to NSData object
- * @return data that represents invocation responce
+ * @param invocationResponce responce to convert to NSData object.
+ * @return data that represents invocation responce.
  */
 + (NSData*)dataFromInvocationResponce:(RMIInvocationResponce*)invocationResponce
 {

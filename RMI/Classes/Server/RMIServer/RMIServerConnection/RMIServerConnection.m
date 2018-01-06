@@ -108,6 +108,11 @@ long n;
     }
 }
 
+- (void)writeData:(const char* _Nullable)data
+{
+    write(newsockfd, data, strlen(data));
+}
+
 /*!
  * @discussion Closes a connection.
  */

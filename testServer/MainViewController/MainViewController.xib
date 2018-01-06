@@ -7,18 +7,19 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="messageLabel" destination="Hym-66-Auk" id="Zfz-4Y-7W9"/>
                 <outlet property="serverStatusLabel" destination="pbo-p0-JSS" id="5x5-QN-upw"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="150"/>
+        <customView wantsLayer="YES" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="155"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="hLZ-0R-6NZ">
-                    <rect key="frame" x="70" y="52" width="100" height="46"/>
+                    <rect key="frame" x="70" y="89" width="100" height="46"/>
                     <subviews>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ViK-lM-Cs6">
                             <rect key="frame" x="-6" y="18" width="112" height="32"/>
@@ -49,11 +50,33 @@
                         <constraint firstAttribute="trailing" secondItem="ViK-lM-Cs6" secondAttribute="trailing" id="yWf-2F-Vwg"/>
                     </constraints>
                 </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hym-66-Auk">
+                    <rect key="frame" x="18" y="20" width="204" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Incoming string" id="vGa-Dn-gf9">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="smT-oo-fUO">
+                    <rect key="frame" x="18" y="45" width="63" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Message:" id="d51-qP-iZd">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="hLZ-0R-6NZ" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="2ey-0F-JBN"/>
-                <constraint firstItem="hLZ-0R-6NZ" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="HUj-EX-zhS"/>
+                <constraint firstItem="hLZ-0R-6NZ" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="Jtg-SK-SVw"/>
+                <constraint firstAttribute="trailing" secondItem="Hym-66-Auk" secondAttribute="trailing" constant="20" id="QDI-wn-kGU"/>
+                <constraint firstItem="Hym-66-Auk" firstAttribute="top" secondItem="smT-oo-fUO" secondAttribute="bottom" constant="8" id="UdR-gd-8Vg"/>
+                <constraint firstItem="Hym-66-Auk" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="aIv-RD-LEq"/>
+                <constraint firstAttribute="bottom" secondItem="Hym-66-Auk" secondAttribute="bottom" constant="20" id="owG-lu-9ui"/>
+                <constraint firstItem="smT-oo-fUO" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="sQz-e7-bWs"/>
             </constraints>
+            <point key="canvasLocation" x="117" y="170.5"/>
         </customView>
     </objects>
 </document>

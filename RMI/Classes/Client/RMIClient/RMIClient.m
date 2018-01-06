@@ -11,6 +11,7 @@
 @interface RMIClient ()
 
 @property (strong, nonatomic) RMIClientConnection* connection;
+@property (strong, nonatomic) NSMutableDictionary* responceHandlingBlocks;
 
 @end
 
@@ -27,6 +28,7 @@
     self = [super init];
     if (self) {
         _connection = [[RMIClientConnection alloc] initWithHost:host port:port];
+        _responceHandlingBlocks = [[NSMutableDictionary alloc] init];
         [_connection setDelegate:self];
     }
     return self;
@@ -61,20 +63,27 @@
 #pragma mark Method invocation
 
 /*!
- * @discussion Invokes remote class / object method on the connected server
- * @param methodName A string representation of remote method selector
- * @param targetType A type of remote message receiver
- * @param targetName A name of a message receiver
- * @param parametersDictionary A discionary of parameters to pass to remote method
+ * @discussion Invokes remote class / object method on the connected server.
+ * @param methodName A string representation of remote method selector.
+ * @param targetType A type of remote message receiver.
+ * @param targetName A name of a message receiver.
+ * @param parametersDictionary A dictionary of parameters to pass to remote method.
  */
-- (void)invokeMethod:(NSString*)methodName ofTarget:(RMIInvocationTargetType)targetType withName:(NSString*)targetName withParametersDictionary:(NSDictionary*)parametersDictionary
+- (void)invokeMethod:(NSString*)methodName ofTarget:(RMIInvocationTargetType)targetType withName:(NSString*)targetName withParametersDictionary:(NSDictionary*)parametersDictionary withCompletionBlock:(void (^ _Nullable)(RMIInvocationResponce* responce))completion
 {
+    NSInteger requestID = arc4random_uniform(999);
+    
     RMIInvocationRequest* invocationRequest = [[RMIInvocationRequest alloc] init];
-    [invocationRequest setID:arc4random_uniform(999)];
+    [invocationRequest setID:requestID];
     [invocationRequest setMethodName:methodName];
     [invocationRequest setTargetType:targetType];
     [invocationRequest setTargetName:targetName];
     [invocationRequest setParametersDictionary:parametersDictionary];
+    
+    if (completion) {
+        [_responceHandlingBlocks setObject:completion forKey:[NSNumber numberWithInteger:requestID]];
+    }
+    
     NSData* data = [RMIRequestResponceMapper dataFromInvocationRequest:invocationRequest];
     NSString* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     [self writeString:[dataString cStringUsingEncoding:NSASCIIStringEncoding]];
@@ -84,17 +93,27 @@
 
 - (void)didClose
 {
-    NSLog(@"didClose");
+    NSLog(@"Connection did close");
 }
 
 - (void)didOpen
 {
-    NSLog(@"Client did open");
+    NSLog(@"Connection did open");
+    [_delegate didConnect];
 }
 
 - (void)didReceiveString:(char *)receivedString
 {
     NSLog(@"didReceiveData %s", receivedString);
+    NSString* string = [NSString stringWithCString:receivedString encoding:NSASCIIStringEncoding];
+    NSData* data = [string dataUsingEncoding:NSASCIIStringEncoding];
+    RMIInvocationResponce* responce = [RMIRequestResponceMapper responceFromData:data];
+    
+    void (^handlerBlock)(RMIInvocationResponce*) = [_responceHandlingBlocks objectForKey:[NSNumber numberWithInteger:[responce ID]]];
+    
+    if (handlerBlock) {
+        handlerBlock(responce);
+    }
 }
 
 @end

@@ -11,6 +11,7 @@
 		3A2C1D9D1FA70F1900706842 /* RMIServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2C1D9B1FA70F1900706842 /* RMIServerConnection.m */; };
 		3A2D9DEB1F9CF45D000AA28A /* RMIServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A2D9DE91F9CF45D000AA28A /* RMIServer.h */; };
 		3A2D9DEC1F9CF45D000AA28A /* RMIServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D9DEA1F9CF45D000AA28A /* RMIServer.m */; };
+		3A4FD67A200012D900A72A19 /* RMIClientDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A4FD679200012D900A72A19 /* RMIClientDelegate.h */; };
 		3A53112A1FF3C37A0064B078 /* RMIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A5311281FF3C37A0064B078 /* RMIClient.h */; };
 		3A53112B1FF3C37A0064B078 /* RMIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5311291FF3C37A0064B078 /* RMIClient.m */; };
 		3A5311341FF3C7980064B078 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5311331FF3C7980064B078 /* AppDelegate.m */; };
@@ -104,6 +105,7 @@
 		3A2C1D9B1FA70F1900706842 /* RMIServerConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIServerConnection.m; sourceTree = "<group>"; };
 		3A2D9DE91F9CF45D000AA28A /* RMIServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIServer.h; sourceTree = "<group>"; };
 		3A2D9DEA1F9CF45D000AA28A /* RMIServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIServer.m; sourceTree = "<group>"; };
+		3A4FD679200012D900A72A19 /* RMIClientDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIClientDelegate.h; sourceTree = "<group>"; };
 		3A5311281FF3C37A0064B078 /* RMIClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMIClient.h; sourceTree = "<group>"; };
 		3A5311291FF3C37A0064B078 /* RMIClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMIClient.m; sourceTree = "<group>"; };
 		3A5311301FF3C7980064B078 /* testServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +210,14 @@
 				3A2C1D991FA70EF100706842 /* RMIServerConnection */,
 			);
 			path = RMIServer;
+			sourceTree = "<group>";
+		};
+		3A4FD678200012AB00A72A19 /* RMIClientDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				3A4FD679200012D900A72A19 /* RMIClientDelegate.h */,
+			);
+			path = RMIClientDelegate;
 			sourceTree = "<group>";
 		};
 		3A5311311FF3C7980064B078 /* testServer */ = {
@@ -476,6 +486,7 @@
 			children = (
 				3A5311281FF3C37A0064B078 /* RMIClient.h */,
 				3A5311291FF3C37A0064B078 /* RMIClient.m */,
+				3A4FD678200012AB00A72A19 /* RMIClientDelegate */,
 				3AE077361FDD6CA100749360 /* RMIClientConnection */,
 			);
 			path = RMIClient;
@@ -507,6 +518,7 @@
 				3AE077391FDD6CBE00749360 /* RMIClientConnection.h in Headers */,
 				3AA401611FAB4AD20018C016 /* RMIRequestResponceMapper.h in Headers */,
 				3AA4017B1FAB54830018C016 /* RMIInvocationRequest.h in Headers */,
+				3A4FD67A200012D900A72A19 /* RMIClientDelegate.h in Headers */,
 				3A7D30C11F9E6BE400E5D3FE /* RMIInvocationInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
