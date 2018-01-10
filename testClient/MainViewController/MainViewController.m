@@ -78,5 +78,14 @@
     }];
 }
 
+- (void)didGetException:(NSException *)exception
+{
+    NSAlert* alert = [[NSAlert alloc] init];
+    [alert setInformativeText:[exception reason]];
+    [alert setAlertStyle:NSAlertStyleWarning];
+    [alert setMessageText:@"Error"];
+    [alert runModal];
+}
+
 
 @end

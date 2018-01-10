@@ -193,7 +193,7 @@
     NSData* responceData = [RMIRequestResponceMapper dataFromInvocationResponce:responce];
     NSString* dataString = [[NSString alloc] initWithData:responceData encoding:NSUTF8StringEncoding];
     
-    [_connection writeData:[dataString cStringUsingEncoding:NSASCIIStringEncoding]];
+    [_connection writeData:[dataString cStringUsingEncoding:NSUTF8StringEncoding]];
 }
 
 #pragma mark RMIConnectionDelegate
@@ -214,8 +214,8 @@
 - (void)didReceiveString:(char *)receivedString
 {
     NSLog(@"didReceiveData %s", receivedString);
-    NSString* string = [NSString stringWithCString:receivedString encoding:NSASCIIStringEncoding];
-    NSData* data = [string dataUsingEncoding:NSASCIIStringEncoding];
+    NSString* string = [NSString stringWithCString:receivedString encoding:NSUTF8StringEncoding];
+    NSData* data = [string dataUsingEncoding:NSUTF8StringEncoding];
     RMIInvocationRequest* request = [RMIRequestResponceMapper requestFromData:data];
     RMIInvocationInfo* info;
     switch ([request targetType])
@@ -234,5 +234,10 @@
             break;
     }
 }
+
+- (void)didRaiseAnException:(NSException *)exception {
+    NSLog(@"%@", [exception reason]);
+}
+
 
 @end

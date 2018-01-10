@@ -11,5 +11,6 @@
 @protocol RMIClientDelegate <NSObject>
 
 - (void)didConnect;
+- (void)didGetException:(NSException*)exception;
 
 @end

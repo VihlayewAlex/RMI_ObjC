@@ -40,18 +40,20 @@ char cl_buffer[256];
  */
 - (void)open
 {
+    __weak RMIClientConnection* weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @try {
         cl_sockfd = socket(AF_INET, SOCK_STREAM, 0);
         if (cl_sockfd < 0)
         {
             NSLog(@"ERROR opening socket");
-            assert(false);
+            @throw [NSException exceptionWithName:@"SocketOpenException" reason:@"Unable to open a socket" userInfo:nil];
         }
         cl_server = gethostbyname(cl_hostnm);
         if (cl_server == NULL)
         {
             NSLog(@"ERROR, no such host");
-            assert(false);
+            @throw [NSException exceptionWithName:@"NoHostException" reason:@"There is no host with a specified name" userInfo:nil];
         }
         bzero((char *) &cl_serv_addr, sizeof(cl_serv_addr));
         cl_serv_addr.sin_family = AF_INET;
@@ -62,19 +64,25 @@ char cl_buffer[256];
         if (connect(cl_sockfd, (struct sockaddr *) &cl_serv_addr, sizeof(cl_serv_addr)) < 0)
         {
             NSLog(@"ERROR connecting");
-            assert(false);
+            @throw [NSException exceptionWithName:@"ConnectionException" reason:@"Unable to connect to server" userInfo:nil];
         } else {
             NSLog(@"Connected");
-            [_delegate didOpen];
+            [[weakSelf delegate] didOpen];
         }
         bzero(cl_buffer,256);
         
         while (read(cl_sockfd, cl_buffer, 255))
         {
-            [_delegate didReceiveString:cl_buffer];
+            [[weakSelf delegate] didReceiveString:cl_buffer];
             bzero(cl_buffer,256);
         }
         NSLog(@"Opened");
+        } @catch(NSException* exception) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"%@", [exception reason]);
+                [[weakSelf delegate] didRaiseAnException:exception];
+            });
+        }
     });
 }
 

@@ -26,4 +26,6 @@
  */
 - (void)didClose;
 
+- (void)didRaiseAnException:(NSException*)exception;
+
 @end
